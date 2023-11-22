@@ -58,6 +58,10 @@ module.exports={
                     {loader: "style-loader"},
                     {loader: "css-loader"}
                 ]
+            },
+            {
+                test: /(\.jpg|\.png|\.jpeg)$/,
+                type: "asset/resource"
             }
         ]
     },

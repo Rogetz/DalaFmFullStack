@@ -3,8 +3,9 @@ import reactDom from "react-dom/client";
 import {createRoot} from "react-dom/client";
 import {RichEditor} from "./richEditor"
 import {Home} from "./home"
+import {ImageUpload} from "./imageUpload"
 
 const root = createRoot(document.getElementById("root"))
 root.render(
-    <Home/>
+    <ImageUpload/>
 )
