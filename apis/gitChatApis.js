@@ -1,7 +1,8 @@
 const {ApolloServer} = require("@apollo/server")
 const {startStandaloneServer} = require("@apollo/server/standalone")
 const jwt = require("jsonwebtoken")
-require("dotenv").config
+// this will be useless outside this app since they offer ther own environment for setting the variables.
+require("dotenv").config({path: "D:/PublishWebApps/DalaFm/fullStack/.env"})
 
 //custom packages
 // I'll have to shift to using the es6 syntax since modules exported in commonjs seem not to work well with destructuring.
@@ -33,9 +34,14 @@ let typeDefs = `
         forgotPassword(userName: String,password: String): Result,
         otpSender(userName:String): Result,
         otpConfirmation(otpPin: Int): Result,
+        presentersFind: Result,
         presenterCreate(name:String,showName:String,time:String,photo:String): Result,
         presenterUpdate(name:String,showName:String,time:String,photo:String) : Result,
-        presenterDelete(name:String,showName:String,time:String,photo:String): Result
+        presenterDelete(name:String,showName:String,time:String,photo:String): Result,
+        createTrendy(hostName:String,title:String,catchPhrase:String,video:String):Result,
+        findTrendy:Result,
+        updateTrendy(hostName:String,title:String,catchPhrase:String,video:String):Result,
+        deleteTrendy(hostName:String,title:String,catchPhrase:String,video:String):Result,
     }
     type Result{
         err: String
@@ -191,17 +197,69 @@ let presenterResolver = {
         let photo = args.photo
         // call the moethod fro creating the presenter Data
         presenter.createPresenter({name:name,showName:showName,time:time,photo:photo}).then(function(result){
-            return(result)
+            return result
         }).catch(function(err){
-            console.log(`an error occured:\n ${err}`)
-            return {obj:null,err:"internal server error"}
+            console.log(`an error occured at createPresenter:\n ${err}`)
+            return {object:null,err:"internal server error"}
+        })
+    },
+    presentersFind: (root,args) => {
+        presenter.findPresenter().then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at presenter find:\n ${err}`)
+            return {object:null,err:"internal server error"}
+        })
+    },
+    presenterUpdate : (root,args) => {
+        let name = args.name
+        let showName = args.showName
+        let time = args.time
+        let photo = args.photo
+
+        presenter.updatePresenter({name:name,showName:showName,time:time,photo:photo}).then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at presenter update:\n ${err}`)
+            return {object:null,err:"internal server error"}
+        })
+    },
+    presenterDelete : (root,args) => {
+        let name = args.name
+        let showName = args.showName
+        let time = args.time
+        let photo = args.photo
+
+        presenter.deletePresenter({name:name,showName:showName,time:time,photo:photo}).then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at presenter deletion:\n ${err}`)
+            return {object:null,err:"internal server error"}
         })
     }
+    
+}
+// for Dalafm trendy
+let trendyResolver = {
+    // finish on this
+    createTrendy : (root,args) => {
+        let name = args.name
+        let showName = args.showName
+        let time = args.time
+        let photo = args.photo
+        // call the moethod fro creating the presenter Data
+        presenter.createPresenter({name:name,showName:showName,time:time,photo:photo}).then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at createPresenter:\n ${err}`)
+            return {object:null,err:"internal server error"}
+        })
+    },
 }
 
 const apolloServer = new ApolloServer({
     typeDefs,
-    resolvers: [authenticationResolvers,tokenResolver],
+    resolvers: [authenticationResolvers,tokenResolver,presenterResolver,trendyResolver],
     graphiql: true
 })
 
@@ -247,7 +305,7 @@ async function  serverCall (){
         // Do note however that apollo server uses the * wildcard for access-control-allow-origin
         cors: {
             // I can change it later perhabs
-            origin : "http://localhost:9500",
+            origin : process.env.APOLLO_ORIGIN,
             // to enable a server to send cookies.
             credentials: true
         }
