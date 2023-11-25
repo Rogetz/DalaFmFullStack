@@ -1,0 +1,481 @@
+@font-face {
+    font-family: Roboto-Bold;
+    src: url("./Roboto-Bold.ttf");
+}
+*{
+    box-sizing: border-box;
+    user-select: none;
+}
+body{
+    width: 100%;
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Roboto-Bold", Times, serif;
+    background-color: rgba(255,255,255,1);
+}
+.major-wrapper{
+    width: 100%;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: "Roboto-Bold", Times, serif;
+    background-color: rgba(255,255,255,1);
+}
+.logo-div{
+    margin: auto;
+    width: 33rem;
+    height: 100%;
+    position: fixed;
+    top: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*add the logo somewhere here.*/
+    /*background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;*/
+}
+.bigger-logo{
+    width: 30rem;
+    height: 30rem;
+    object-fit: cover;
+}
+
+.upper-menu{
+    width: 100%;
+    height: 4rem;
+    padding: 0rem;
+    margin: 0rem;
+    position: sticky;
+    top: 0.001rem;
+    margin-bottom: 1rem;
+    background-color: rgba(0,0,0,1);
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 5;
+    backdrop-filter: blur(10rem);
+}
+.upper-menu .login-signup{
+    width: auto;
+    height: 100%;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding-right: 2rem;
+    cursor: pointer;
+}
+.upper-menu .login-signup:hover{
+    color: green;
+}
+@media screen and (max-width: 1200px){
+    div.img-wrapper .presenter-img{
+        position: absolute;
+        bottom: -10%;
+        left: 25%;
+        width: 50%;
+        height: 110%;
+        border-radius: 0.5rem;
+    }
+    div.main-div{
+        margin-top: 2.5rem;
+        justify-content: space-evenly;
+        gap: 0rem;
+    }
+    .main-div div.live-video{
+        height: 80vh;
+    }    
+    div.main-div div.current-presenter-portfolio{
+        padding: 0rem 2rem;
+    }
+    div.main-div div.current-presenter-portfolio h2{
+        margin-top: 0;
+        padding-top: 0;
+    }
+    div.trendy-wrapper{
+        width: 92%;
+    }
+}
+@media screen and (max-width: 591px){
+    .main-div div.live-video{
+        height: 60vh;
+    }    
+    div.trending-videos{
+        min-width: 50%;
+        flex-wrap: nowrap;
+    }
+    div.trendy-wrapper{
+        width: 96%;
+    }
+    div.single-video{
+        width: 15rem;
+        height: 36vh;    
+        flex-grow: 0;
+    }
+    div.input-div{
+        width: 100%;
+        min-height: 2.8rem;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 0rem 1rem;
+        justify-content: space-evenly;
+        align-items: center;
+    }    
+    label.label-class{
+        width: 100%;
+        height: 1.5rem;
+        font-size: 1rem;
+    }
+    input.actual-input{
+        width: 100%;
+        height: 2.5rem;
+        padding: 0rem 1.5rem;
+    }    
+
+}
+
+@media screen and (max-width: 850px) {
+    .upper-menu .other-options{
+        display: none;
+        visibility: hidden;   
+    }
+    div.img-wrapper .presenter-img{
+        position: absolute;
+        bottom: -10%;
+        left: 25%;
+        width: 50%;
+        height: 110%;
+        border-radius: 0.5rem;
+    }
+    div.bottom-slide-wrapper .current-show-name{
+        font-size: 1rem;
+        height: 100%;
+    }
+    .upper-menu .login-signup{
+        padding-right: 5rem;
+    }
+    .live-stream div{
+        width: auto;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        margin: 0;
+    }
+    .live-stream hr{
+        border: 0.2rem solid blue;
+        background-color: blue;
+        margin: 0;
+    }
+    .main-div{
+        margin-top: 2.5rem;
+    }
+    div.main-presentation{
+        width: 96%;
+    }
+}
+@media screen and (min-width: 850px) {
+    .upper-menu .fa-bars{
+        display: none;
+        visibility: hidden;
+    }
+
+}
+.upper-menu span.fa{
+    margin-right: 0.35rem;
+    font-size: 1.7rem;
+    z-index: 10;
+}
+.other-options{
+    width: auto;
+    height: 100%;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: center;
+}
+.upper-menu .fa-bars{
+    color: white;
+    font-size: 1.7rem;
+    position: absolute;
+    right: 0.2rem;
+    cursor: pointer;
+}
+.upper-menu .fa-close{
+    color: red;
+    font-size: 1.7rem;
+    position: absolute;
+    right: 0.2rem;
+    cursor: pointer;
+}
+.hidden{
+    display: none;
+    visibility: hidden;
+}
+.active{
+    display: flex;
+    visibility: visible;
+}
+.other-options .opt{
+    width: auto;
+    height: 2rem;
+    color: rgba(255,255,255,1);
+    padding-bottom: 0.5rem;
+    border-bottom: 0.2rem solid blue;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.other-options .opt:hover{
+    color:blue;
+    border-bottom: 0.2rem solid rgba(255,255,255,1);   
+}
+.menu-logo{
+    width: 10rem;
+    /*height: 3.5rem;*/
+    height: 100%;
+    background-color: rgba(255,255,255,1);
+    position: relative;
+    left: 0rem;
+    column-gap: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.logo-img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;   
+}
+.brand-name{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: 1.4rem;
+    color: rgba(82,7,10,1);
+    font-family: 'Roboto-Bold', Times, serif;
+}
+.toggled-menu{
+    background-color: black;
+    color: white;
+    width: 50%;
+    height: auto;
+    backdrop-filter: blur(20rem);
+    position: fixed;
+    top: 4rem;
+    right: 0rem;
+    display: none;
+    visibility: hidden;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 0.8rem 1.3rem;
+    /*toggled menu here is using the z-index of the parent*/ 
+}
+.toggled-menu.active{
+    display: flex;
+    visibility: visible;
+}
+.toggled-menu .opt{
+    display: flex;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+.toggled-menu .opt:hover{
+    border-bottom: 0.2rem solid green;
+}
+.footer{
+    width: 100%;
+    height: 26vh;
+    padding: 0.5rem;
+    padding-top: 2rem;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    gap: 1rem;
+    position: relative;
+    bottom: 0rem;
+}
+.social-handles{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    color: blue;
+    font-size: 2.5rem;
+    width: auto;
+    height: auto;
+    align-items: center;
+    overflow: hidden;
+}
+.copyright-info{
+    color: white;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+}
+.copyright-class{
+    display: flex;
+    gap: 1rem;
+}
+.dala-div{
+    color: blue;
+}
+a{
+    color: blue;
+    text-decoration: none;
+}
+@media screen and (max-width:991px) {
+    .social-handles{
+        font-size: 1.4rem;
+    }  
+    .copyright-info{
+        font-size: 0.6rem;  
+        gap: 1rem;   
+    }
+    .copyright-class{
+        font-size: 1rem;
+    } 
+    .dala-div{
+        font-size: 1rem;
+    }
+}
+.footer .social-handles span.fa-youtube{
+    color: red;
+}
+.footer .social-handles span.fa-instagram{
+    color: brown;
+}
+.footer .social-handles span.fa-twitter{
+    color: rgba(0,150,255,1);
+}
+
+
+/*The actual presentation div starts here.*/
+.main-presentation{
+    width: 36rem;
+    min-height: 30rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 0.1rem solid blue;
+    padding: 1rem 0rem;
+    box-sizing: border-box;
+    border-radius: 1rem;
+    box-shadow: 0.1rem 0.1rem 0.5rem -1px blue,-0.1rem -0.1rem -0.5rem -1px black;
+    margin-bottom: 3rem;
+}
+.intro-div{
+    font-weight: bold;
+    color: black;
+    font-size: 1.2rem;
+    text-align: center;
+}
+.details{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.input-div{
+    width: 100%;
+    min-height: 2.8rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0rem 1rem;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.label-class{
+    width: 30%;
+    height: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-grow: 1;
+    font-size: 1.3rem;
+    color: blue;
+}
+.actual-input{
+    width: 60%;
+    height: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-grow: 1;
+    border-radius: 1rem;
+    border: 0.1rem solid blue;
+    padding: 0rem 1.5rem;
+}
+input#presenter-img{
+    display: none;
+    visibility: hidden;
+}
+label.image-class{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin: auto;
+}
+img#actual-image{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: 0.2rem solid black;
+}
+ p{
+    color: blue;
+    margin: auto;
+}
+button.submit-btn{
+    width: 80%;
+    height: 2.5rem;
+    margin: auto;
+    background-color: white;
+    color: blue;
+    border-radius: 2rem;
+    border: none;
+    box-shadow: 0.01rem 0.01rem 0.5rem -3px blue,-0.01rem -0.01rem 0.5rem -3px black;
+    font-weight: bold;
+}
+button.submit-btn:hover{
+    background-color: blue;
+    color: white;
+}

@@ -34,14 +34,42 @@ let typeDefs = `
         forgotPassword(userName: String,password: String): Result,
         otpSender(userName:String): Result,
         otpConfirmation(otpPin: Int): Result,
+    }
+    type Query{
         presentersFind: Result,
         presenterCreate(name:String,showName:String,time:String,photo:String): Result,
         presenterUpdate(name:String,showName:String,time:String,photo:String) : Result,
         presenterDelete(name:String,showName:String,time:String,photo:String): Result,
+    }
+    type Query{
         createTrendy(hostName:String,title:String,catchPhrase:String,video:String):Result,
         findTrendy:Result,
         updateTrendy(hostName:String,title:String,catchPhrase:String,video:String):Result,
         deleteTrendy(hostName:String,title:String,catchPhrase:String,video:String):Result,
+    }
+    type Query{
+        createSport(hostName:String,title:String,catchPhrase:String,video:String): Result,
+        findSport: Result,
+        deleteSport(hostName:String,title:String,catchPhrase:String,video:String): Result,
+        updateSport(hostName:String,title:String,catchPhrase:String,video:String): Result
+    }
+    type Query{
+        createHottestNews(hostName:String,title:String,catchPhrase:String,video:String):Result,
+        findHottestNews:Result,
+        deleteHottestNews(hostName:String,title:String,catchPhrase:String,video:String):Result,
+        updateHottestNews(hostName:String,title:String,catchPhrase:String,video:String): Result
+    }
+    type Query{
+        createBlog(author:String,title:String,catchPhrase:String,details:String,pictures:String):Result,
+        findBlog:Result,
+        deleteBlog(author:String,title:String,catchPhrase:String,details:String,pictures:String):Result,
+        updateBlog(author:String,title:String,catchPhrase:String,details:String,pictures:String): Result
+    }
+    type Query{
+        createAdmin(admin:String,email:String):Result,
+        findAdmin:Result,
+        deleteAdmin(admin:String,email:String):Result,
+        updateAdmin(admin:String,email:String):Result
     }
     type Result{
         err: String
@@ -127,11 +155,11 @@ let authenticationResolvers = {
                                 }
                                 else{
                                     console.log(response)
-                                    return {err:"internal server error"}
+                                    return {err:"error on sending the email"}
                                 }
                             }).catch(function(err){
                                 console.log(err)
-                                return {err :"internal server error"}
+                                return {err :"error on sending the email"}
                             })
         
                         }
@@ -141,12 +169,12 @@ let authenticationResolvers = {
                         }
                     }).catch(function(err){
                         console.log(err)
-                        return({err: "internal server error"})
+                        return({err: "error processing email data"})
                     })
                 }
             }).catch(function(err){
                 console.log(err)
-                return {err:"internal server error"}
+                return {err:"email error"}
             }) 
         },
         otpConfirmation : (root,args) => {
@@ -159,7 +187,7 @@ let authenticationResolvers = {
                 }
             }).catch(function(err){
                 console.log(err)
-                return {err:"internal server error"}
+                return {err:"error verifying the email."}
             })
         }
     }
@@ -200,7 +228,7 @@ let presenterResolver = {
             return result
         }).catch(function(err){
             console.log(`an error occured at createPresenter:\n ${err}`)
-            return {object:null,err:"internal server error"}
+            return {object:null,err:"error creating the presenter"}
         })
     },
     presentersFind: (root,args) => {
@@ -208,7 +236,7 @@ let presenterResolver = {
             return result
         }).catch(function(err){
             console.log(`an error occured at presenter find:\n ${err}`)
-            return {object:null,err:"internal server error"}
+            return {object:null,err:"error searching for presenter"}
         })
     },
     presenterUpdate : (root,args) => {
@@ -221,7 +249,7 @@ let presenterResolver = {
             return result
         }).catch(function(err){
             console.log(`an error occured at presenter update:\n ${err}`)
-            return {object:null,err:"internal server error"}
+            return {object:null,err:"error updating the presenter"}
         })
     },
     presenterDelete : (root,args) => {
@@ -234,32 +262,300 @@ let presenterResolver = {
             return result
         }).catch(function(err){
             console.log(`an error occured at presenter deletion:\n ${err}`)
-            return {object:null,err:"internal server error"}
+            return {object:null,err:"error deleting the presenter"}
         })
     }
     
 }
+
+// for dalafm admins
+let adminResolvers = {
+    // finish on this
+    createAdmin : (root,args) => {
+        let admin = args.admin
+        let email = args.email
+
+        presenter.createAdmin({admin:admin,email:email}).then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at create admin:\n ${err}`)
+            return {object:null,err:"error creating the video"}
+        })
+    },
+    findAdmin : (root,args) => {
+        presenter.findAdmin().then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at find Admin:\n ${err}`)
+            return {object:null,err:"error creating the video"}
+        })
+    },
+    deleteAdmin : (root,args) => {
+        let admin = args.admin
+        let email = args.email
+
+        presenter.deleteAdmin({admin:admin,email:email}).then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at deleting admin:\n ${err}`)
+            return {object:null,err:"error deleteing the video"}
+        })
+    },
+    updateAdmin : (root,args) => {
+        let admin = args.admin
+        let email = args.email
+
+        presenter.updateAdmin({admin:admin,email:email}).then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at update admin:\n ${err}`)
+            return {object:null,err:"error updating the video"}
+        })
+    }    
+}
+
 // for Dalafm trendy
+/*
+hostName,
+title,
+catchPhrase
+video
+*/
 let trendyResolver = {
     // finish on this
     createTrendy : (root,args) => {
-        let name = args.name
-        let showName = args.showName
-        let time = args.time
-        let photo = args.photo
+        let hostName = args.hostName
+        let title = args.title
+        let catchPhrase = args.catchPhrase
+        // remember that this video is a string url probably or something else enabling us identify the youtube url/video api.
+        let video = args.video
         // call the moethod fro creating the presenter Data
-        presenter.createPresenter({name:name,showName:showName,time:time,photo:photo}).then(function(result){
+        presenter.createTrendy({hostName:hostName,title:title,catchPhrase:catchPhrase,video:video}).then(function(result){
             return result
         }).catch(function(err){
-            console.log(`an error occured at createPresenter:\n ${err}`)
-            return {object:null,err:"internal server error"}
+            console.log(`an error occured at createTrendy:\n ${err}`)
+            return {object:null,err:"error creating the video"}
         })
     },
+    findTrendy : (root,args) => {
+        presenter.findTrendy().then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at createTrendy:\n ${err}`)
+            return {object:null,err:"error creating the video"}
+        })
+    },
+    deleteTrendy : (root,args) => {
+        let hostName = args.hostName
+        let title = args.title
+        let catchPhrase = args.catchPhrase
+        // remember that this video is a string url probably or something else enabling us identify the youtube url/video api.
+        let video = args.video
+        // call the moethod fro creating the presenter Data
+        presenter.deleterendy({hostName:hostName,title:title,catchPhrase:catchPhrase,video:video}).then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at createTrendy:\n ${err}`)
+            return {object:null,err:"error creating the video"}
+        })
+    },
+    updateTrendy : (root,args) => {
+        let hostName = args.hostName
+        let title = args.title
+        let catchPhrase = args.catchPhrase
+        // remember that this video is a string url probably or something else enabling us identify the youtube url/video api.
+        let video = args.video
+        // call the moethod fro creating the presenter Data
+        presenter.updateTrendy({hostName:hostName,title:title,catchPhrase:catchPhrase,video:video}).then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at createTrendy:\n ${err}`)
+            return {object:null,err:"error creating the video"}
+        })
+    }
+}
+
+/*
+sports
+hostName,
+title,
+catchPhrase
+video
+*/
+let sportResolver = {
+    createSport : (root,args) => {
+        let hostName = args.hostName
+        let title = args.title
+        let catchPhrase = args.catchPhrase
+        // remember that this video is a string url probably or something else enabling us identify the youtube url/video api.
+        let video = args.video
+        // call the moethod fro creating the presenter Data
+        presenter.createSport({hostName:hostName,title:title,catchPhrase:catchPhrase,video:video}).then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at createTrendy:\n ${err}`)
+            return {object:null,err:"error creating the video"}
+        })
+    },
+    findSport : (root,args) => {
+        presenter.findSport().then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at findSport:\n ${err}`)
+            return {object:null,err:"error finding the video"}
+        })
+    },
+    deleteSport : (root,args) => {
+        let hostName = args.hostName
+        let title = args.title
+        let catchPhrase = args.catchPhrase
+        // remember that this video is a string url probably or something else enabling us identify the youtube url/video api.
+        let video = args.video
+        // call the moethod fro creating the presenter Data
+        presenter.deleteSport({hostName:hostName,title:title,catchPhrase:catchPhrase,video:video}).then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at delete sport:\n ${err}`)
+            return {object:null,err:"error deleting the video"}
+        })
+    },
+    updateSport : (root,args) => {
+        let hostName = args.hostName
+        let title = args.title
+        let catchPhrase = args.catchPhrase
+        // remember that this video is a string url probably or something else enabling us identify the youtube url/video api.
+        let video = args.video
+        // call the moethod fro creating the presenter Data
+        presenter.updateSport({hostName:hostName,title:title,catchPhrase:catchPhrase,video:video}).then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at updating sport:\n ${err}`)
+            return {object:null,err:"error updating the video"}
+        })
+    }
+
+}
+let hottestNewsResolver = {
+
+    createHottestNews : (root,args) => {
+        let hostName = args.hostName
+        let title = args.title
+        let catchPhrase = args.catchPhrase
+        // remember that this video is a string url probably or something else enabling us identify the youtube url/video api.
+        let video = args.video
+        // call the moethod fro creating the presenter Data
+        presenter.createHottestNews({hostName:hostName,title:title,catchPhrase:catchPhrase,video:video}).then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at createTrendy:\n ${err}`)
+            return {object:null,err:"error creating the video"}
+        })
+    },
+    findHottestNews : (root,args) => {
+        presenter.findHottestNews().then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at find news:\n ${err}`)
+            return {object:null,err:"error finding the video"}
+        })
+    },
+    deleteHottestNews : (root,args) => {
+        let hostName = args.hostName
+        let title = args.title
+        let catchPhrase = args.catchPhrase
+        // remember that this video is a string url probably or something else enabling us identify the youtube url/video api.
+        let video = args.video
+        // call the moethod fro creating the presenter Data
+        presenter.deleteHottestNews({hostName:hostName,title:title,catchPhrase:catchPhrase,video:video}).then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at delete news:\n ${err}`)
+            return {object:null,err:"error deleting the video"}
+        })
+    },
+    updateHottestNews : (root,args) => {
+        let hostName = args.hostName
+        let title = args.title
+        let catchPhrase = args.catchPhrase
+        // remember that this video is a string url probably or something else enabling us identify the youtube url/video api.
+        let video = args.video
+        // call the moethod fro creating the presenter Data
+        presenter.updateHottestNews({hostName:hostName,title:title,catchPhrase:catchPhrase,video:video}).then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at updating news:\n ${err}`)
+            return {object:null,err:"error updating the video"}
+        })
+    }
+
+}
+
+/*
+author,
+title,
+catchPhrase,
+details,
+pictures
+*/
+// remember that here the pictures comes as a json string however its upon you to convert it into an object
+let blogResolver = {
+    createBlog : (root,args) => {
+        let author = args.author
+        let title = args.title
+        let catchPhrase = args.catchPhrase
+        let details = args.details
+        // remember that this video is a string url probably or something else enabling us identify the youtube url/video api.
+        let pictures = JSON.parse(args.pictures)
+        console.log(`pictures received is an object, if null or undefined then there's an eror: ${JSON.stringify(pictures)}`)
+        // call the moethod fro creating the presenter Data
+        presenter.createBlog({author:author,title:title,catchPhrase:catchPhrase,details:details,pictures:pictures}).then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at create Blog:\n ${err}`)
+            return {object:null,err:"error creating the video"}
+        })
+    },
+    findBlog : (root,args) => {
+        presenter.findBlog().then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at find blog:\n ${err}`)
+            return {object:null,err:"error finding the video"}
+        })
+    },
+    deleteBlog : (root,args) => {
+        let author = args.author
+        let title = args.title
+        let catchPhrase = args.catchPhrase
+        let details = args.details
+        let pictures = JSON.parse(args.pictures)
+
+        presenter.deleteBlog({author:author,title:title,catchPhrase:catchPhrase,details:details,pictures:pictures}).then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at delete blog:\n ${err}`)
+            return {object:null,err:"error deleting the video"}
+        })
+    },
+    updateBlog : (root,args) => {
+        let author = args.author
+        let title = args.title
+        let catchPhrase = args.catchPhrase
+        let details = args.details
+        let pictures = JSON.parse(args.pictures)
+
+        presenter.updateBlog({author:author,title:title,catchPhrase:catchPhrase,details:details,pictures:pictures}).then(function(result){
+            return result
+        }).catch(function(err){
+            console.log(`an error occured at updating blog:\n ${err}`)
+            return {object:null,err:"error updating the video"}
+        })
+    }
 }
 
 const apolloServer = new ApolloServer({
     typeDefs,
-    resolvers: [authenticationResolvers,tokenResolver,presenterResolver,trendyResolver],
+    resolvers: [authenticationResolvers,tokenResolver,presenterResolver,trendyResolver,blogResolver,sportResolver,hottestNewsResolver,adminResolvers],
     graphiql: true
 })
 

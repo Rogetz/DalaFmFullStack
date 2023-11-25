@@ -114,17 +114,22 @@ body{
 }
 @media screen and (max-width: 591px){
     .main-div div.live-video{
-        height: 60vh;
-    }    
+        width: 100%;
+        margin: 0;
+        height: 50vh;
+    }   
+    .main-div div.live-video video{
+        width: 100%;
+    } 
     div.trending-videos{
-        min-width: 50%;
+        width: 78%;
         flex-wrap: nowrap;
     }
     div.trendy-wrapper{
         width: 96%;
     }
     div.single-video{
-        width: 15rem;
+        width: 98%;
         height: 36vh;    
         flex-grow: 0;
     }
@@ -505,9 +510,12 @@ a{
     margin: auto;
     overflow: hidden;
     position: relative;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
 }
 .trending-videos{
-    width: 100%;
+    width: 93%;
     height: 40vh;
     margin: 0;
     padding: 0rem 1rem;
@@ -530,7 +538,7 @@ a{
     color: white;
     position: absolute;
     z-index: 3;
-    left: 0.5rem;
+    left: 0rem;
     top: 45%;
     display: flex;
     flex-direction: row;
@@ -558,7 +566,7 @@ span.fa,span.fa-brands,span.fa-solid{
     color: white;
     position: absolute;
     z-index: 3;
-    right: 0.5rem;
+    right: 0rem;
     top: 45%;
     display: flex;
     flex-direction: row;
@@ -593,6 +601,7 @@ span.fa,span.fa-brands,span.fa-solid{
     border-radius: 0.5rem;
     position: relative;
     padding: 0.5rem;
+    border-radius: 1rem;
 }
 .single-video div{
     z-index: 2;
