@@ -203,7 +203,7 @@ time,
 photo.
 */
 // presenter apis
-export function findPresenters(){
+export function findPresenter(){
     // must return a promise.
     return new Promise(function(resolve,reject){
         try{
@@ -247,10 +247,10 @@ export function createPresenter({name,showName,time,photo}){
                         //query : `{login(userName:${userName},password:${password})}`,
                         query : `query presenterCreateQuery($name:String,$showName:String,$time:String,$photo:String){presenterCreate(name:$name,showName:$showName,time:$time,photo:$photo){err,object}}`,
                         variables : {
-                            name,
-                            showName,
-                            time,
-                            photo
+                            name:name,
+                            showName:showName,
+                            time:time,
+                            photo:photo
                         }
                     }),
                     headers : {
@@ -281,7 +281,7 @@ export function createPresenter({name,showName,time,photo}){
 
 
 }
-export function deletePresenter(name,showName,time,photo){
+export function deletePresenter({name,showName,time,photo}){
     // must return a promise.
     return new Promise(function(resolve,reject){
         try{
@@ -291,10 +291,10 @@ export function deletePresenter(name,showName,time,photo){
                         //query : `{login(userName:${userName},password:${password})}`,
                         query : `query presenterDeleteQuery($name:String,$showName:String,$time:String,$photo:String){presenterDelete(name:$name,showName:$showName,time:$time,photo:$photo){err,object}}`,
                         variables : {
-                            name,
-                            showName,
-                            time,
-                            photo
+                            name:name,
+                            showName:showName,
+                            time:time,
+                            photo:photo
                         }
                     }),
                     headers : {
@@ -313,7 +313,7 @@ export function deletePresenter(name,showName,time,photo){
         }
     })
 }
-export function updatePresenter(name,showName,time,photo){
+export function updatePresenter({name,showName,time,photo}){
     return new Promise(function(resolve,reject){
         try{
             fetch(process.env.API_LINK,
@@ -322,10 +322,10 @@ export function updatePresenter(name,showName,time,photo){
                         //query : `{login(userName:${userName},password:${password})}`,
                         query : `query presenterUpdateQuery($name:String,$showName:String,$time:String,$photo:String){presenterUpdate(name:$name,showName:$showName,time:$time,photo:$photo){err,object}}`,
                         variables : {
-                            name,
-                            showName,
-                            time,
-                            photo
+                            name:name,
+                            showName:showName,
+                            time:time,
+                            photo:photo
                         }
                     }),
                     headers : {
@@ -391,8 +391,8 @@ export function createAdmin({admin,email}){
                         //query : `{login(userName:${userName},password:${password})}`,
                         query : `query createAdminQuery($admin:String,$email:String){createAdmin(admin:$admin,email:$email){err,object}}`,
                         variables : {
-                            admin,
-                            email
+                            admin: admin,
+                            email: email
                         }
                     }),
                     headers : {
@@ -412,8 +412,7 @@ export function createAdmin({admin,email}){
                     console.log(`the shortened result from login is: ${result.data.login}`)
                     // simply resolve whatever is returned.
                     // I've created some dummy "valid" string for testing.
-                    console.log(`the err: ${result.data.login.err} and object: ${result.data.login.object}`)
-                    */
+                    console.log(`the err: ${result.data.login.err} and object: ${result.data.login.object}`)*/
                     resolve(result.data.createAdmin)
                 })        
         } catch (err){
@@ -423,7 +422,7 @@ export function createAdmin({admin,email}){
 
 
 }
-export function deleteAdmin(name,showName,time,photo){
+export function deleteAdmin({admin,email}){
     // must return a promise.
     return new Promise(function(resolve,reject){
         try{
@@ -433,8 +432,8 @@ export function deleteAdmin(name,showName,time,photo){
                         //query : `{login(userName:${userName},password:${password})}`,
                         query : `query deleteAdminQuery($admin:String,$email:String){deleteAdmin(admin:$admin,email:$email){err,object}}`,
                         variables : {
-                            admin,
-                            email    
+                            admin:admin,
+                            email:email   
                         }
                     }),
                     headers : {
@@ -463,8 +462,8 @@ export function updateAdmin({admin,email}){
                         //query : `{login(userName:${userName},password:${password})}`,
                         query : `query updateAdminQuery($admin:String,$email:String){updateAdmin(admin:$admin,email:$email){err,object}}`,
                         variables : {
-                            admin,
-                            email
+                            admin:admin,
+                            email:email
                         }
                     }),
                     headers : {
@@ -512,10 +511,10 @@ export function createTrendy({hostName,title,catchPhrase,video}){
                         //query : `{login(userName:${userName},password:${password})}`,
                         query : `query createTrendyQuery($hostName:String,$title:String,$catchPhrase:String,$video:String){createTrendy(hostName:$hostName,title:$title,catchPhrase:$catchPhrase,video:$video){err,object}}`,
                         variables : {
-                            hostName,
-                            title,
-                            catchPhrase,
-                            video                            
+                            hostName:hostName,
+                            title:title,
+                            catchPhrase:catchPhrase,
+                            video:video                            
                         }
                     }),
                     headers : {
@@ -554,10 +553,10 @@ export function updateTrendy({hostName,title,catchPhrase,video}){
                         //query : `{login(userName:${userName},password:${password})}`,
                         query : `query updateTrendyQuery($hostName:String,$title:String,$catchPhrase:String,$video:String){updateTrendy(hostName:$hostName,title:$title,catchPhrase:$catchPhrase,video:$video){err,object}}`,
                         variables : {
-                            hostName,
-                            title,
-                            catchPhrase,
-                            video                            
+                            hostName:hostName,
+                            title:title,
+                            catchPhrase:catchPhrase,
+                            video:video                            
                         }
                     }),
                     headers : {
@@ -596,10 +595,10 @@ export function deleteTrendy({hostName,title,catchPhrase,video}){
                         //query : `{login(userName:${userName},password:${password})}`,
                         query : `query deleteTrendyQuery($hostName:String,$title:String,$catchPhrase:String,$video:String){deleteTrendy(hostName:$hostName,title:$title,catchPhrase:$catchPhrase,video:$video){err,object}}`,
                         variables : {
-                            hostName,
-                            title,
-                            catchPhrase,
-                            video                            
+                            hostName:hostName,
+                            title:title,
+                            catchPhrase:catchPhrase,
+                            video:video                            
                         }
                     }),
                     headers : {
@@ -676,10 +675,10 @@ export function updateSport({hostName,title,catchPhrase,video}){
                         //query : `{login(userName:${userName},password:${password})}`,
                         query : `query updateSportQuery($hostName:String,$title:String,$catchPhrase:String,$video:String){updateSport(hostName:$hostName,title:$title,catchPhrase:$catchPhrase,video:$video){err,object}}`,
                         variables : {
-                            hostName,
-                            title,
-                            catchPhrase,
-                            video                            
+                            hostName:hostName,
+                            title:title,
+                            catchPhrase:catchPhrase,
+                            video:video                            
                         }
                     }),
                     headers : {
@@ -718,10 +717,10 @@ export function createSport({hostName,title,catchPhrase,video}){
                         //query : `{login(userName:${userName},password:${password})}`,
                         query : `query createSportQuery($hostName:String,$title:String,$catchPhrase:String,$video:String){createSport(hostName:$hostName,title:$title,catchPhrase:$catchPhrase,video:$video){err,object}}`,
                         variables : {
-                            hostName,
-                            title,
-                            catchPhrase,
-                            video                            
+                            hostName:hostName,
+                            title:title,
+                            catchPhrase:catchPhrase,
+                            video:video                            
                         }
                     }),
                     headers : {
@@ -760,10 +759,10 @@ export function deleteSport({hostName,title,catchPhrase,video}){
                         //query : `{login(userName:${userName},password:${password})}`,
                         query : `query deleteSportQuery($hostName:String,$title:String,$catchPhrase:String,$video:String){deleteSport(hostName:$hostName,title:$title,catchPhrase:$catchPhrase,video:$video){err,object}}`,
                         variables : {
-                            hostName,
-                            title,
-                            catchPhrase,
-                            video                            
+                            hostName:hostName,
+                            title:title,
+                            catchPhrase:catchPhrase,
+                            video:video                            
                         }
                     }),
                     headers : {
@@ -830,10 +829,10 @@ export function updateHottestNews({hostName,title,catchPhrase,video}){
                         //query : `{login(userName:${userName},password:${password})}`,
                         query : `query updateHottestNewsQuery($hostName:String,$title:String,$catchPhrase:String,$video:String){updateHottestNews(hostName:$hostName,title:$title,catchPhrase:$catchPhrase,video:$video){err,object}}`,
                         variables : {
-                            hostName,
-                            title,
-                            catchPhrase,
-                            video                            
+                            hostName:hostName,
+                            title:title,
+                            catchPhrase:catchPhrase,
+                            video:video                            
                         }
                     }),
                     headers : {
@@ -872,10 +871,10 @@ export function createHottestNews({hostName,title,catchPhrase,video}){
                         //query : `{login(userName:${userName},password:${password})}`,
                         query : `query createHottestNewsQuery($hostName:String,$title:String,$catchPhrase:String,$video:String){createHottestNews(hostName:$hostName,title:$title,catchPhrase:$catchPhrase,video:$video){err,object}}`,
                         variables : {
-                            hostName,
-                            title,
-                            catchPhrase,
-                            video                            
+                            hostName:hostName,
+                            title:title,
+                            catchPhrase:catchPhrase,
+                            video:video                            
                         }
                     }),
                     headers : {
@@ -914,10 +913,10 @@ export function deleteHottestNews({hostName,title,catchPhrase,video}){
                         //query : `{login(userName:${userName},password:${password})}`,
                         query : `query deleteHottestNewsQuery($hostName:String,$title:String,$catchPhrase:String,$video:String){deleteHottestNews(hostName:$hostName,title:$title,catchPhrase:$catchPhrase,video:$video){err,object}}`,
                         variables : {
-                            hostName,
-                            title,
-                            catchPhrase,
-                            video                            
+                            hostName:hostName,
+                            title:title,
+                            catchPhrase:catchPhrase,
+                            video:video                            
                         }
                     }),
                     headers : {
@@ -982,7 +981,7 @@ details,
 pictures
 */
 // ensure that the pictures is brought as it is since in my final request I'm converting everything to json before submitting them to the graphQl
-export function updateBlog(author,title,catchPhrase,details,pictures){
+export function updateBlog({author,title,catchPhrase,details,pictures}){
     return new Promise(function(resolve,reject){
         try{
             fetch(process.env.API_LINK,
@@ -990,11 +989,11 @@ export function updateBlog(author,title,catchPhrase,details,pictures){
                     body: JSON.stringify({
                         query : `query updateBlogQuery($author:String,$title:String,$catchPhrase:String,$details:String,$pictures:String){updateBlog(author:$author,title:$title,catchPhrase:$catchPhrase,details:$details,pictures:$pictures){err,object}}`,
                         variables : {
-                            author,
-                            title,
-                            catchPhrase,
-                            details,
-                            pictures
+                            author:author,
+                            title:title,
+                            catchPhrase:catchPhrase,
+                            details:details,
+                            pictures:pictures
                         }
                     }),
                     headers : {
@@ -1014,7 +1013,7 @@ export function updateBlog(author,title,catchPhrase,details,pictures){
     })
 }
 // I hope that the pictures object will be read as is supposed
-export function createBlog(author,title,catchPhrase,details,pictures){
+export function createBlog({author,title,catchPhrase,details,pictures}){
     return new Promise(function(resolve,reject){
         try{
             fetch(process.env.API_LINK,
@@ -1022,11 +1021,11 @@ export function createBlog(author,title,catchPhrase,details,pictures){
                     body: JSON.stringify({
                         query : `query createBlogQuery($author:String,$title:String,$catchPhrase:String,$details:String,$pictures:String){createBlog(author:$author,title:$title,catchPhrase:$catchPhrase,details:$details,pictures:$pictures){err,object}}`,
                         variables : {
-                            author,
-                            title,
-                            catchPhrase,
-                            details,
-                            pictures
+                            author:author,
+                            title:title,
+                            catchPhrase:catchPhrase,
+                            details:details,
+                            pictures:pictures
                         }
                     }),
                     headers : {
@@ -1073,7 +1072,7 @@ export function findBlog(){
     })
 }
 
-export function deleteBlog(author,title,catchPhrase,details,pictures){
+export function deleteBlog({author,title,catchPhrase,details,pictures}){
     return new Promise(function(resolve,reject){
         try{
             fetch(process.env.API_LINK,
@@ -1081,11 +1080,11 @@ export function deleteBlog(author,title,catchPhrase,details,pictures){
                     body: JSON.stringify({
                         query : `query blogDeleteQuery($author:String,$title:String,$catchPhrase:String,$details:String,$pictures:String){deleteBlog(author:$author,title:$title,catchPhrase:$catchPhrase,details:$details,pictures:$pictures){err,object}}`,
                         variables : {
-                            author,
-                            title,
-                            catchPhrase,
-                            details,
-                            pictures
+                            author:author,
+                            title:title,
+                            catchPhrase:catchPhrase,
+                            details:details,
+                            pictures:pictures
                         }
                     }),
                     headers : {

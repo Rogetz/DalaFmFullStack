@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useState,useRef,useEffect} from "react"
 import "./adminCreator.css"
 import {createAdmin} from "./apis"
 
@@ -9,21 +9,28 @@ export function AdminCreator(){
         e.preventDefault()
         let admin = e.target.admin.value
         let email = e.target.email.value
-        createAdmin(admin,email).then(function({err,object}){
+        createAdmin({admin:admin,email:email}).then(function({err,object}){
             if(err != null){
                 setNotificationState(err)
                 setAlertStyle(errorAlert)
                 setTimeout(function(){
                     setAlertStyle(initialDisplay)
-                },5000)
+                },3000)
             }
             else if(object != null){
                 setNotificationState(object)
                 setAlertStyle(successAlert)
                 setTimeout(function(){
                     setAlertStyle(initialDisplay)
-                },5000)
+                },3000)
             }
+        }).catch((err) => {
+            setNotificationState("error calling the api")
+            setAlertStyle(errorAlert)
+            setTimeout(function(){
+                setAlertStyle(initialDisplay)
+            },3000)
+            console.log(err)
         })
     }
     let initialDisplay = {
