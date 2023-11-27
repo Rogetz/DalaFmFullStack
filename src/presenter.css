@@ -1,0 +1,589 @@
+@font-face {
+    font-family: Roboto-Bold;
+    src: url("./Roboto-Bold.ttf");
+}
+*{
+    box-sizing: border-box;
+    user-select: none;
+}
+body{
+    width: 100%;
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Roboto-Bold", Times, serif;
+    background-color: rgba(255,255,255,1);
+}
+.major-wrapper{
+    width: 100%;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Roboto-Bold", Times, serif;
+    background-color: rgba(255,255,255,1);
+}
+.logo-div{
+    margin: auto;
+    width: 33rem;
+    height: 100%;
+    position: fixed;
+    top: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*add the logo somewhere here.*/
+    /*background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;*/
+}
+.bigger-logo{
+    width: 30rem;
+    height: 30rem;
+    object-fit: cover;
+}
+
+.upper-menu{
+    width: 100%;
+    height: 4rem;
+    padding: 0rem;
+    margin: 0rem;
+    position: sticky;
+    top: 0.001rem;
+    margin-bottom: 1rem;
+    background-color: rgba(0,0,0,1);
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 5;
+    backdrop-filter: blur(10rem);
+}
+.upper-menu .login-signup{
+    width: auto;
+    height: 100%;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding-right: 2rem;
+    cursor: pointer;
+}
+.upper-menu .login-signup:hover{
+    color: green;
+}
+@media screen and (max-width: 1200px){
+    div.img-wrapper .presenter-img{
+        position: absolute;
+        bottom: -10%;
+        left: 25%;
+        width: 50%;
+        height: 110%;
+        border-radius: 0.5rem;
+    }
+    div.main-div{
+        margin-top: 2.5rem;
+        justify-content: space-evenly;
+        gap: 0rem;
+    }
+    .main-div div.live-video{
+        height: 80vh;
+    }    
+    div.main-div div.current-presenter-portfolio{
+        padding: 0rem 2rem;
+    }
+    div.main-div div.current-presenter-portfolio h2{
+        margin-top: 0;
+        padding-top: 0;
+    }
+    div.trendy-wrapper{
+        width: 92%;
+    }
+}
+@media screen and (max-width: 591px){
+    .main-div div.live-video{
+        height: 60vh;
+    }    
+    div.trending-videos{
+        min-width: 50%;
+        flex-wrap: nowrap;
+    }
+    div.trendy-wrapper{
+        width: 96%;
+    }
+    div.single-video{
+        width: 15rem;
+        height: 36vh;    
+        flex-grow: 0;
+    }
+
+}
+
+@media screen and (max-width: 850px) {
+    .upper-menu .other-options{
+        display: none;
+        visibility: hidden;   
+    }
+    div.img-wrapper .presenter-img{
+        position: absolute;
+        bottom: -10%;
+        left: 25%;
+        width: 50%;
+        height: 110%;
+        border-radius: 0.5rem;
+    }
+    div.bottom-slide-wrapper .current-show-name{
+        font-size: 1rem;
+        height: 100%;
+    }
+    .upper-menu .login-signup{
+        padding-right: 5rem;
+    }
+    .live-stream div{
+        width: auto;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        margin: 0;
+    }
+    .live-stream hr{
+        border: 0.2rem solid blue;
+        background-color: blue;
+        margin: 0;
+    }
+    .main-div{
+        margin-top: 2.5rem;
+    }
+    
+}
+@media screen and (min-width: 850px) {
+    .upper-menu .fa-bars{
+        display: none;
+        visibility: hidden;
+    }
+}
+.upper-menu span.fa{
+    margin-right: 0.35rem;
+    font-size: 1.7rem;
+    z-index: 10;
+}
+.other-options{
+    width: auto;
+    height: 100%;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: center;
+}
+.upper-menu .fa-bars{
+    color: white;
+    font-size: 1.7rem;
+    position: absolute;
+    right: 0.2rem;
+    cursor: pointer;
+}
+.upper-menu .fa-close{
+    color: red;
+    font-size: 1.7rem;
+    position: absolute;
+    right: 0.2rem;
+    cursor: pointer;
+}
+.hidden{
+    display: none;
+    visibility: hidden;
+}
+.active{
+    display: flex;
+    visibility: visible;
+}
+.other-options .opt{
+    width: auto;
+    height: 2rem;
+    color: rgba(255,255,255,1);
+    padding-bottom: 0.5rem;
+    border-bottom: 0.2rem solid blue;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.other-options .opt:hover{
+    color:blue;
+    border-bottom: 0.2rem solid rgba(255,255,255,1);   
+}
+.menu-logo{
+    width: 10rem;
+    /*height: 3.5rem;*/
+    height: 100%;
+    background-color: rgba(255,255,255,1);
+    position: relative;
+    left: 0rem;
+    column-gap: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.logo-img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;   
+}
+.brand-name{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: 1.4rem;
+    color: rgba(82,7,10,1);
+    font-family: 'Roboto-Bold', Times, serif;
+}
+.toggled-menu{
+    background-color: black;
+    color: white;
+    width: 50%;
+    height: auto;
+    backdrop-filter: blur(20rem);
+    position: fixed;
+    top: 4rem;
+    right: 0rem;
+    display: none;
+    visibility: hidden;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 0.8rem 1.3rem;
+    /*toggled menu here is using the z-index of the parent*/ 
+}
+.toggled-menu.active{
+    display: flex;
+    visibility: visible;
+}
+.toggled-menu .opt{
+    display: flex;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+.toggled-menu .opt:hover{
+    border-bottom: 0.2rem solid green;
+}
+.footer{
+    width: 100%;
+    height: 26vh;
+    padding: 0.5rem;
+    padding-top: 2rem;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    gap: 1rem;
+    position: relative;
+    bottom: 0rem;
+}
+.social-handles{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    color: blue;
+    font-size: 2.5rem;
+    width: auto;
+    height: auto;
+    align-items: center;
+    overflow: hidden;
+}
+.copyright-info{
+    color: white;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+}
+.copyright-class{
+    display: flex;
+    gap: 1rem;
+}
+.dala-div{
+    color: blue;
+}
+a{
+    color: blue;
+    text-decoration: none;
+}
+@media screen and (max-width:991px) {
+    .social-handles{
+        font-size: 1.4rem;
+    }  
+    .copyright-info{
+        font-size: 0.6rem;  
+        gap: 1rem;   
+    }
+    .copyright-class{
+        font-size: 1rem;
+    } 
+    .dala-div{
+        font-size: 1rem;
+    }
+}
+
+
+/*presenter's wrapper*/
+.presenters-wrapper{
+    width: 100%;
+    min-height: 30rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0rem 1rem;
+    justify-content: space-evenly;
+    margin-bottom: 2rem;
+}
+.presenter-card{
+    width: 25rem;
+    height: 25rem;
+    background-color: rgba(0,0,255,0.7);
+    border-radius: 1rem;
+    color: blue;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    box-shadow: 0.01rem 0.01rem 0.5rem -1px black,-0.01rem -0.01rem -0.5rem -1px blue;
+}
+.top-div{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+}
+.top-div .top-presenter-img{
+    width: 12rem;
+    height: 12rem;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 0.2rem solid black;
+    background-color: black;
+}
+.presenter-card-bottom{
+    width: 100%;
+    height: 50%;
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border-top-right-radius: 5rem;
+    background-color: black;
+    overflow: hidden;
+}
+.presenter-name{
+    font-weight: bolder;
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+}
+.presenter-show{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+}
+.show-title{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+.left-show{
+    width: auto;
+    font-weight: lighter;
+    color: rgba(255,255,255,1);
+    background-color: rgba(0,0,255,0.5);
+    font-size: 1.3rem;
+    padding: 0.4rem 1rem;
+    border-radius: 0.3rem;
+}
+.show-details{
+    font-size: 1.5rem;
+    height: 2.2rem;
+    overflow: hidden;
+    color: rgba(255,255,255,1);
+    text-align: center;
+}
+.show-times{
+    font-size: 1rem;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    color: rgba(0,0,0,1);   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.show-times{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.time-title{
+    color: rgba(0,0,255,0.5);
+    font-size: 1rem;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 1rem;
+    padding: 0.3rem 1.3rem;
+    background-color: rgba(255,255,255,1);
+}
+.time-details{
+    color: white;
+}
+/*Director's div*/
+.director-div{
+    width: 100%;
+    height: 33rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    border-radius: 0.5rem;
+    background-color: rgba(0,0,0,1);
+    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+}
+.director-left{
+    width: 50%;
+    height: 100%;
+    background-color: rgba(255,255,255,1);
+    border-bottom-right-radius: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.director-right{
+    width: 50%;
+    height: 100%;
+    background-color: transparent;
+    padding: 2rem 0rem;
+}
+@media screen and (max-width: 991px) {
+    .director-div{
+        width: 100%;
+        height: 35rem;
+        margin: 0rem 1rem;
+        padding: 0rem;
+    } 
+    .director-left{
+        width: 100%;
+        height: 50%;
+        border-bottom-right-radius: 0rem;
+        border-bottom-left-radius: 5rem;
+        overflow: hidden;
+    }       
+    div.welcome-note{
+        width: 100%;
+    }
+    div.director-right{
+        width: 100%;
+        height: 50%;
+        padding: 0rem;
+        background-color: transparent;
+    }        
+}
+@media screen and (max-width: 551px){
+    div.director-div{
+        width: 96%;
+        height: 32rem;
+        margin: 0rem 1rem;
+        padding: 0rem;
+        overflow: hidden;
+    } 
+    .director-left{
+        width: 100%;
+        height: 50%;
+        border-bottom-right-radius: 0rem;
+        border-bottom-left-radius: 5rem;
+    }       
+    .director-right{
+        width: 100%;
+        height: 50%;
+        padding: 0rem;
+        background-color: transparent;
+    }        
+    img.director-pic{
+        width: 100%;
+        height: 100%;
+        border-bottom-left-radius: 5rem;
+    }
+    div.welcome-note{
+        height: 8.6rem;
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+}
+.director-pic{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: rgba(255,255,255,1);
+}
+.director-name{
+    margin: 1rem 0rem;
+    text-align: center;
+    font-size: 1.3rem;
+    height: 1.6rem;
+    color: blue;
+    overflow: hidden;
+}
+.welcome-note{
+    padding: 0rem 2rem;
+    height: 11.5rem;
+    overflow: hidden;
+    font-size: 1.2rem;
+    color: rgba(255,255,255,1);
+    font-weight: bold;
+}
+h2.welcome-intro{
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    padding: 0.3rem 1rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    background-color: white;
+    color: blue;
+    font-weight: lighter;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+.footer .social-handles span.fa-youtube{
+    color: red;
+}
+.footer .social-handles span.fa-instagram{
+    color: brown;
+}
+.footer .social-handles span.fa-twitter{
+    color: rgba(0,150,255,1);
+}
