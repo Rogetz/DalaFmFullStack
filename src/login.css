@@ -1,0 +1,217 @@
+*{
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    color: white;
+}
+.box{
+    top: 5rem;
+    position: relative;
+    width: 25rem;
+    height: 30rem;
+    background-color: blue;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin: auto;
+}
+.box::before {
+    /* ensure that the width of the after and the before match the box*/
+    content: '';
+    position: absolute;
+    left: -50%;
+    top: -50%;
+    width: 25rem;
+    height: 30rem;
+    /* the linear gradient has three lines */
+    background-image: linear-gradient(0deg,transparent,blue,blue);
+    transform-origin: bottom right;
+    animation: animatedForms 6s linear infinite;
+}
+.box::after {
+    content: '';
+    position: absolute;
+    width: 25rem;
+    height: 30rem;
+    right: -50%;
+    bottom: -50%;
+    background-image: linear-gradient(0deg,transparent,blue,blue);
+    transform-origin: top left;
+    animation: animatedForms 6s linear infinite;
+}
+@media screen and (max-width: 591px){
+    .box{
+        width: 20rem;
+        height: 30rem;
+    }
+    .box::before {
+        width: 20rem;
+        height: 30rem;
+    }
+    .box::after {
+        width: 20rem;
+        height: 30rem;
+    }    
+}
+
+@keyframes animatedForms{
+    0%{
+        transform: rotate(0deg);
+        background-image: linear-gradient(0deg,transparent,blue,red);
+    }
+    25%{
+        background-image: linear-gradient(0deg,transparent,rgba(0,255,255,1),rgba(0,0,255));
+    }
+    50%{
+        transform: rotate(180deg);
+        background-image: linear-gradient(0deg,black,rgba(150,0,255,1),rgba(255,0,255));
+
+    }
+    75%{
+        background-image: linear-gradient(0deg,transparent,rgba(150,100,255,1),rgba(0,255,0));
+    }
+    100%{
+        transform: rotate(360deg);
+        background-image: linear-gradient(0deg,black,rgba(150,0,255,1),rgba(150,50,255));
+    }
+}
+.login-form-div{
+    /*There's no width and no height*/
+    position: absolute;
+    /*inset is shorthand for padding/margin */
+    inset: 4px;
+    background-color: white;
+    color:blue;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 2rem;
+    padding: 2rem 2rem;
+    border-radius: 0.5rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.login-form-div .login-title{
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: blue;
+    text-align: center;
+}
+
+.login-input-div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.login-input-div input{
+    width: 100%;
+    height: 2.8rem;
+    border-radius: 0.3rem;
+    margin: auto;
+    color: black;
+    font-weight: bolder;
+    outline: none;
+    border: none;
+    border-bottom: blue;
+    background-color: transparent;
+    border-width: 0.5rem;
+    padding-left: 1rem;
+    box-shadow: 0.01rem 0.01rem 0.5rem -5px blue,-0.01rem -0.01rem 0.5rem -5px black;
+}
+
+input:focus ~ label{
+    display: block;
+    visibility: visible;    
+}
+.login-input-div input::placeholder{
+    color: rgba(0,0,255,1);
+}
+.login-input-div label{
+    position: absolute;
+    top: -1.5rem;
+    left: 0rem;
+    display: none;
+    visibility: hidden;
+    color: rgba(0,0,255,1);
+}
+.login-form-div button{
+    width: 100%;
+    height: 2.8rem;
+    font-weight: bolder;
+    font-size: 1rem;
+    color: blue;
+    border-radius: 2rem;
+}
+.login-form-div button#login-button{
+    background-color: blue;
+    color: white;
+    border: none;
+    box-shadow: 0.1rem 0.1rem 0.2rem -1px green,-0.1rem -0.1rem 0.2rem -1px black;
+}
+.login-form-div button#login-button:hover{
+    background-color: green;
+    color: white;
+    box-shadow: 0.1rem 0.1rem 0.2rem -1px blue,-0.1rem -0.1rem 0.2rem -1px black;
+}
+.login-form-div button:hover{
+    background-color: green;
+    color: white;
+}
+
+.login-form-div .options-text{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+}
+.login-form-div .options-text a#forgot-id{
+    font-size: 0.8rem;
+}
+.login-form-div .options-text a#forgot-id:hover{
+    color: green;
+}
+.login-form-div .options-text a#sign-up-redirect {
+    color: green;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.login-form-div .options-text a#sign-up-redirect:hover{
+    color: blue;
+}
+.login-form-div .options-text button:hover{
+    background-color: blue;
+    color: white;
+}
+
+.login-menu-logo{
+    width: 100%;
+    /*height: 3.5rem;*/
+    height: fit-content;
+    background-color: rgba(255,255,255,1);
+    position: relative;
+    left: 0rem;
+    column-gap: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.login-logo-img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;   
+}
+.login-brand-name{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: 1.4rem;
+    color: rgba(82,7,10,1);
+    font-family: 'Roboto-Bold', Times, serif;
+}

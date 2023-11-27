@@ -137,7 +137,7 @@ export function Wrapper(){
                 <div className="opt"><span className="fa fa-info-circle"><FaInfoCircle/></span><Link to="about">About</Link></div>
                 <div className="opt"><span className="fa fa-microphone"><FaMicrophone/></span><Link to="presenter">presenters</Link></div>
             </div>
-            <div className="login-signup"><span className="fa fa-user-circle"><FaUserCircle/></span>login</div>
+            <div className="login-signup"><span className="fa fa-user-circle"><FaUserCircle/></span><Link to="/login">login</Link></div>
             <span ref={menuButton} onClick={menuHandler} className="fa fa-bars"><FaBars/></span>
             <span ref={cancelButton} onClick={cancelHandler} className="fa fa-close hidden"><FaWindowClose/></span>
             <div ref={options} className="toggled-menu">

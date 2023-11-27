@@ -11,6 +11,7 @@ import  ErrorElement  from "./errorElement";
 import { ContactUs } from "./contactUs";
 import {About} from "./about"
 import {Presenter} from "./presenter"
+import {Login} from "./login"
 
 let route = createBrowserRouter([
     {
@@ -35,10 +36,18 @@ let route = createBrowserRouter([
                 element: <Presenter/>
             }
         ]
+    },
+    {
+        path: "/login",
+        element: <Login/>,
+        errorElement: <ErrorElement/>
     }
 ])
 
 const root = createRoot(document.getElementById("root"))
-root.render(
+/*root.render(
     <RouterProvider router={route}/>
+)*/
+root.render(
+    <AdminCreator/>
 )
