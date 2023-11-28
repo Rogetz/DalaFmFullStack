@@ -494,6 +494,37 @@ export function updateAdmin({admin,email}){
 
 
 }
+export function logAdmin({email,password}){
+    // must return a promise.
+    return new Promise(function(resolve,reject){
+        try{
+            fetch(process.env.API_LINK,
+                {
+                    body: JSON.stringify({
+                        //query : `{login(userName:${userName},password:${password})}`,
+                        query : `query logAdminQuery($email:String,$password:String){logAdmin(email:$email,password:$password){err,object}}`,
+                        variables : {
+                            email:email,
+                            password:password
+                        }
+                    }),
+                    headers : {
+                        "Content-Type": "application/json",
+                        "Authentication" : "null"
+                    },
+                    method: "POST",
+                    mode: "cors"
+                }).then(function(response){
+                    return response.json()
+                }).then(function(result){
+                    resolve(result.data.logAdmin)
+                })        
+        } catch (err){
+            resolve({err: "error occured while processing request"})
+        }
+    })
+}
+
 
 /*
 hostName,

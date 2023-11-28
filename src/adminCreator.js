@@ -1,10 +1,14 @@
 import React,{useState,useRef,useEffect} from "react"
 import "./adminCreator.css"
 import {createAdmin} from "./apis"
+import { FaCheckCircle, FaWindowClose } from "react-icons/Fa"
 
 export function AdminCreator(){
     const [alertStyle,setAlertStyle] = useState(initialDisplay)
+    const [alertState,setAlertState] = useState("error")
+    const [iconStyle,setIconStyle] = useState({backgroundColor:"red",color:"white"})
     const [notificationState,setNotificationState] = useState(null)
+    const [wraperStyle,setWraperStyle] = useState({display: "none",visibility: "hidden"})
     let adminHandler = function(e){
         e.preventDefault()
         let admin = e.target.admin.value
@@ -13,6 +17,9 @@ export function AdminCreator(){
             if(err != null){
                 setNotificationState(err)
                 setAlertStyle(errorAlert)
+                setAlertState("error")
+                setIconStyle({backgroundColor:"red",color: "white"})
+                setWraperStyle({display:"block",visibility: "visible"})
                 setTimeout(function(){
                     setAlertStyle(initialDisplay)
                 },3000)
@@ -20,6 +27,9 @@ export function AdminCreator(){
             else if(object != null){
                 setNotificationState(object)
                 setAlertStyle(successAlert)
+                setAlertState("success")
+                setIconStyle({backgroundColor:"green",color:"white"})
+                setWraperStyle({display:"block",visibility: "visible"})
                 setTimeout(function(){
                     setAlertStyle(initialDisplay)
                 },3000)
@@ -38,45 +48,58 @@ export function AdminCreator(){
         visibility: "hidden",
         backgroundColor: "transparent",
         color: "white",
-        fontWeight: "bold",
-        fontSize: "1.3rem",
-        padding: "1rem",
-        borderRadius: "1rem"
+        fontWeight: "medium",
+        fontSize: "1rem",
+        padding: "0rem",
     }
     let successAlert = {
         backgroundColor: "green",
         color: "white",
-        fontWeight: "bold",
-        fontSize: "1.3rem",
-        padding: "1rem",
-        borderRadius: "1rem"
+        fontWeight: "medium",
+        fontSize: "1rem",
+        padding: "0rem",
+        borderRadius: "0rem"
     }
     let errorAlert = {
         backgroundColor: "red",
         color: "white",
         fontWeight: "bold",
-        fontSize: "1.3rem",
-        padding: "1rem",
-        borderRadius: "1rem"
+        fontWeight: "medium",
+        fontSize: "1rem",
+        padding: "0rem",
+        borderRadius: "0rem"
     }
-    return (
-    <div className="major-wrapper">
-        <div style={alertStyle}>{notificationState}</div>
-        <div className="main-presentation">
-            <div className="intro-div">Presenter creation</div>
-            <form className="details" onSubmit={adminHandler}>
-                <div className="input-div">
-                    <label className="label-class" htmlFor="admin">Admin</label>
-                    <input type="text" className="actual-input" name="admin" placeholder="admin name" id="presenterId"/>    
-                </div>
-                <div className="input-div">
-                    <label className="label-class" htmlFor="email">email address</label>
-                    <input type="text" className="actual-input" name="email" placeholder="email address" id="email"/>    
-                </div>
-                <button type="submit" className="submit-btn">submit</button>
-            </form>
-        </div>
-    </div>
 
+    return (
+        <div className="admin-major-wrapper">
+            <div style={alertStyle}>
+                <div className="toast-wrapper" style={wraperStyle}>
+                    <div className="toast-top-div">
+                        <div className="alert-text">{alertState}</div>  
+                        <div className="alert-time" >now</div> 
+                    </div>
+                    <hr style={{width: "100%",color:"white"}}/>
+                    <div className="toast-div">
+                        <span style={iconStyle} className="fa fa-check-circle">{alertState == "error"?<FaWindowClose/>:<FaCheckCircle/>}</span>
+                        <span clasName="alert-text">{notificationState}</span>
+                    </div>
+                    <div className="slider"></div>
+                </div>
+            </div>
+            <div className="main-presentation">
+                <div className="intro-div">Presenter creation</div>
+                <form className="details" onSubmit={adminHandler}>
+                    <div className="admin-input-div">
+                        <label className="label-class" htmlFor="admin">Admin</label>
+                        <input type="text" className="actual-input" name="admin" placeholder="admin name" id="presenterId"/>    
+                    </div>
+                    <div className="admin-input-div">
+                        <label className="label-class" htmlFor="email">email address</label>
+                        <input type="text" className="actual-input" name="email" placeholder="email address" id="email"/>    
+                    </div>
+                    <button type="submit" className="admin-submit-btn">submit</button>
+                </form>
+            </div>
+        </div>
     )    
 }

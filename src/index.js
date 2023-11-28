@@ -45,9 +45,7 @@ let route = createBrowserRouter([
 ])
 
 const root = createRoot(document.getElementById("root"))
-/*root.render(
-    <RouterProvider router={route}/>
-)*/
+//root.render(<AdminCreator/>)
 root.render(
-    <AdminCreator/>
+    <RouterProvider router={route}/>
 )

@@ -8,14 +8,14 @@ a:hover{
     color: white;
 }
 .box{
-    top: 5rem;
     position: relative;
     width: 25rem;
-    height: 30rem;
+    height: 34rem;
     background-color: blue;
     border-radius: 0.5rem;
-    overflow: hidden;
+    top: 2rem;
     margin: auto;
+    overflow: hidden;
 }
 .box::before {
     /* ensure that the width of the after and the before match the box*/
@@ -24,7 +24,7 @@ a:hover{
     left: -50%;
     top: -50%;
     width: 25rem;
-    height: 30rem;
+    height: 34rem;
     /* the linear gradient has three lines */
     background-image: linear-gradient(0deg,transparent,blue,blue);
     transform-origin: bottom right;
@@ -34,7 +34,7 @@ a:hover{
     content: '';
     position: absolute;
     width: 25rem;
-    height: 30rem;
+    height: 34rem;
     right: -50%;
     bottom: -50%;
     background-image: linear-gradient(0deg,transparent,blue,blue);
@@ -44,15 +44,15 @@ a:hover{
 @media screen and (max-width: 591px){
     .box{
         width: 20rem;
-        height: 30rem;
+        height: 34rem;
     }
     .box::before {
         width: 20rem;
-        height: 30rem;
+        height: 34rem;
     }
     .box::after {
         width: 20rem;
-        height: 30rem;
+        height: 34rem;
     }    
 }
 
@@ -214,4 +214,82 @@ input:focus ~ label{
     font-size: 1.4rem;
     color: rgba(82,7,10,1);
     font-family: 'Roboto-Bold', Times, serif;
+}
+
+/*added radios*/
+.radio-div{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+}
+.actual-radio-div{
+    width: auto;
+    height:auto;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+/*toast wrapper styling*/
+.login-toast-wrapper{
+    min-width: 20rem;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    box-sizing: border-box;
+}
+.login-toast-div{
+    background-color: transparent;
+    width: 100%;
+    height: auto;
+    display: flex;
+    gap: 2rem;
+    font-size: 0.9rem;
+    color: white;
+    padding: 0.3rem 1rem;
+    box-sizing: border-box;
+}
+.login-alert-text{
+    color: white;
+}
+.login-toast-wrapper .login-slider{
+    width: 0%;
+    height: 0.2rem;
+    background-color: black;
+    box-sizing: border-box;
+    animation: slideAnime linear 3s; 
+}
+.login-toast-top-div{
+    width: 100%;
+    height: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    color: white;
+    box-sizing: border-box;
+    padding: 0.5rem;
+}
+.login-fa-check-circle{
+    color: transparent;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 50%;
+    font-size: 1.4rem;
+}
+
+@keyframes slideAnime {
+    0%{
+        width: 100%;
+    }
+    100%{
+        width: 0%;
+    }
 }

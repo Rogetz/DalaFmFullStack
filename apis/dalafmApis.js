@@ -69,7 +69,8 @@ let typeDefs = `
         createAdmin(admin:String,email:String):Result,
         findAdmin:Result,
         deleteAdmin(admin:String,email:String):Result,
-        updateAdmin(admin:String,email:String):Result
+        updateAdmin(admin:String,email:String):Result,
+        logAdmin(email:String,password:String): Result
     }
     type Result{
         err: String
@@ -291,6 +292,16 @@ let adminResolvers = {
             }).catch(function(err){
                 console.log(`an error occured at find Admin:\n ${err}`)
                 return {object:null,err:"error creating the video"}
+            })
+        },
+        logAdmin : (root,args) => {
+            let email = args.email
+            let password = args.password
+            return presenter.logAdmin({email:email,password:password}).then(function(result){
+                return result
+            }).catch(function(err){
+                console.log(`error occured at the login function: ${err}`)
+                return {object: null,err: "error loggin in"}
             })
         },
         deleteAdmin : (root,args) => {
