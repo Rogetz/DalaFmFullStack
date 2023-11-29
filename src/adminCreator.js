@@ -2,6 +2,7 @@ import React,{useState,useRef,useEffect} from "react"
 import "./adminCreator.css"
 import {createAdmin} from "./apis"
 import { FaCheckCircle, FaWindowClose } from "react-icons/Fa"
+import dalaFmRounded from  "./dalaFm_rounded_logo.PNG"
 
 export function AdminCreator(){
     const [alertStyle,setAlertStyle] = useState(initialDisplay)
@@ -81,13 +82,17 @@ export function AdminCreator(){
                     <hr style={{width: "100%",color:"white"}}/>
                     <div className="toast-div">
                         <span style={iconStyle} className="fa fa-check-circle">{alertState == "error"?<FaWindowClose/>:<FaCheckCircle/>}</span>
-                        <span clasName="alert-text">{notificationState}</span>
+                        <span className="alert-text">{notificationState}</span>
                     </div>
                     <div className="slider"></div>
                 </div>
             </div>
             <div className="main-presentation">
-                <div className="intro-div">Presenter creation</div>
+                <div className="login-menu-logo">
+                    <img className="login-logo-img" src={dalaFmRounded} alt="avt" />
+                    <div className="login-brand-name">DALA FM</div>
+                </div>    
+                <div className="intro-div" style={{color:"blue",marginBottom: "2rem"}}>Admin creation</div>
                 <form className="details" onSubmit={adminHandler}>
                     <div className="admin-input-div">
                         <label className="label-class" htmlFor="admin">Admin</label>
@@ -97,7 +102,7 @@ export function AdminCreator(){
                         <label className="label-class" htmlFor="email">email address</label>
                         <input type="text" className="actual-input" name="email" placeholder="email address" id="email"/>    
                     </div>
-                    <button type="submit" className="admin-submit-btn">submit</button>
+                    <button type="submit" style={{marginTop:"2rem"}} className="admin-submit-btn">submit</button>
                 </form>
             </div>
         </div>

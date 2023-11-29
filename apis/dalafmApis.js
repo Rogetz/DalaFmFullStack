@@ -37,9 +37,10 @@ let typeDefs = `
     }
     type Query{
         presenterFind: Result,
-        presenterCreate(name:String,showName:String,time:String,photo:String): Result,
+        presenterCreate(name:String,email:String,showName:String,time:String,photo:String): Result,
         presenterUpdate(name:String,showName:String,time:String,photo:String) : Result,
         presenterDelete(name:String,showName:String,time:String,photo:String): Result,
+        logPresenter(email:String,password:String): Result
     }
     type Query{
         createTrendy(hostName:String,title:String,catchPhrase:String,video:String):Result,
@@ -225,13 +226,25 @@ let presenterResolver = {
             let showName = args.showName
             let time = args.time
             let photo = args.photo
+            let email = args.email
             // call the moethod fro creating the presenter Data
-            return presenter.createPresenter({name:name,showName:showName,time:time,photo:photo}).then(function(result){
+            return presenter.createPresenter({name:name,email:email,showName:showName,time:time,photo:photo}).then(function(result){
                 return result
             }).catch(function(err){
                 console.log(`an error occured at createPresenter:\n ${err}`)
                 return {object:null,err:"error creating the presenter"}
             })
+        },
+        logPresenter : (root,args) => {
+            let email = args.email
+            let password = args.password 
+            return presenter.logPresenter({email:email,password:password}).then(function(result){
+                return result
+            }).catch(function(err){
+                console.log(`error occured at the presenter login function: ${err}`)
+                return {object: null,err: "error loggin in"}
+            })
+
         },
         presenterFind: (root,args) => {
             return presenter.findPresenter().then(function(result){
@@ -300,7 +313,7 @@ let adminResolvers = {
             return presenter.logAdmin({email:email,password:password}).then(function(result){
                 return result
             }).catch(function(err){
-                console.log(`error occured at the login function: ${err}`)
+                console.log(`error occured at the admin login function: ${err}`)
                 return {object: null,err: "error loggin in"}
             })
         },

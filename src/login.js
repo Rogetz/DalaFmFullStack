@@ -1,6 +1,6 @@
 import React,{useState,useEffect,useRef} from "react"
 import "./login.css"
-import {logAdmin} from "./apis"
+import {logAdmin,logPresenter} from "./apis"
 import { FaCheckCircle, FaWindowClose } from "react-icons/Fa"
 import dalaFmRounded from "./dalaFm_rounded_logo.PNG"
 
@@ -47,18 +47,45 @@ export function Login(){
                 setTimeout(function(){
                     setAlertStyle(initialDisplay)
                 },3000)
-                console.log(err)    
             })
         }
         else{
             // the role should be a presenter for normal login
+            logPresenter({email:email,password:password}).then(function({err,object}){
+                if(err != null){
+                    setNotificationState(err)
+                    setAlertStyle(errorAlert)
+                    setAlertState("error")
+                    setIconStyle({backgroundColor:"red",color: "white"})
+                    setWraperStyle({display:"block",visibility: "visible"})
+                    setTimeout(function(){
+                        setAlertStyle(initialDisplay)
+                    },3000)    
+                }
+                else if(object != null){
+                    setNotificationState(object)
+                    setAlertStyle(successAlert)
+                    setAlertState("success")
+                    setIconStyle({backgroundColor:"green",color:"white"})
+                    setWraperStyle({display:"block",visibility: "visible"})
+                    setTimeout(function(){
+                        setAlertStyle(initialDisplay)
+                    },3000)    
+                }
+            }).catch(function(err){
+                setNotificationState("error calling the api")
+                setAlertStyle(errorAlert)
+                setTimeout(function(){
+                    setAlertStyle(initialDisplay)
+                },3000)
+            })
         }
     }
     let initialDisplay = {
         position: "absolute",
         top: "0rem",
         left: "0rem",
-        zIndex: "3rem",
+        zIndex: "5",
         display: "none",
         visibility: "hidden",
         backgroundColor: "transparent",
@@ -66,34 +93,37 @@ export function Login(){
         fontWeight: "medium",
         fontSize: "1rem",
         padding: "0rem",
+        overflow: "hidden",
     }
     let successAlert = {
         position: "absolute",
         top: "0rem",
         left: "0rem",
-        zIndex: "3rem",
+        zIndex: "5",
         backgroundColor: "green",
         color: "white",
         fontWeight: "medium",
         fontSize: "1rem",
         padding: "0rem",
-        borderRadius: "0rem"
+        borderRadius: "0rem",
+        overflow: "hidden",
     }
     let errorAlert = {
         position: "absolute",
         top: "0rem",
         left: "0rem",
-        zIndex: "3rem",
+        zIndex: "5",
         backgroundColor: "red",
         color: "white",
         fontWeight: "bold",
         fontWeight: "medium",
         fontSize: "1rem",
         padding: "0rem",
-        borderRadius: "0rem"
+        borderRadius: "0rem",
+        overflow: "hidden",
     }
     return(
-        <div className="box" >
+        <div className="box">
             <div style={alertStyle}>
                 <div className="login-toast-wrapper" style={wraperStyle}>
                     <div className="login-toast-top-div">
@@ -117,21 +147,21 @@ export function Login(){
                     <p style={{marginBottom: "0"}}>Log In</p>
                 </div>
                 <div className="login-input-div">
-                    <input type="text" name="email" id="email" placeholder="email address"/>
+                    <input type="text" required name="email" id="email" placeholder="email address"/>
                     <label htmlFor="email">email address</label>
                 </div>
                 <div className="login-input-div">
-                    <input type="password" name="password" id="password" placeholder="password"/>
+                    <input type="password" required name="password" id="password" placeholder="password"/>
                     <label htmlFor="password">password</label>
                 </div>
                 <div className="radio-div">
                     <div className="actual-radio-div">
                         <label htmlFor="admin">admin</label>
-                        <input type="radio" name="role" id="admin" value="admin"/>    
+                        <input type="radio" required name="role" id="admin" value="admin"/>    
                     </div>
                     <div className="actual-radio-div">
                         <label htmlFor="presenter">presenter</label>
-                        <input type="radio" name="role" id="presenter" value="presenter"/>   
+                        <input type="radio" required name="role" id="presenter" value="presenter"/>   
                     </div>
                 </div>
                 <div className="options-text">

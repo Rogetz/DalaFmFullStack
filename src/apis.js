@@ -237,7 +237,7 @@ export function findPresenter(){
         }
     })
 }
-export function createPresenter({name,showName,time,photo}){
+export function logPresenter({email,password}){
     // must return a promise.
     return new Promise(function(resolve,reject){
         try{
@@ -245,12 +245,43 @@ export function createPresenter({name,showName,time,photo}){
                 {
                     body: JSON.stringify({
                         //query : `{login(userName:${userName},password:${password})}`,
-                        query : `query presenterCreateQuery($name:String,$showName:String,$time:String,$photo:String){presenterCreate(name:$name,showName:$showName,time:$time,photo:$photo){err,object}}`,
+                        query : `query logPresenterQuery($email:String,$password:String){logPresenter(email:$email,password:$password){err,object}}`,
+                        variables : {
+                            email:email,
+                            password:password
+                        }
+                    }),
+                    headers : {
+                        "Content-Type": "application/json",
+                        "Authentication" : "null"
+                    },
+                    method: "POST",
+                    mode: "cors"
+                }).then(function(response){
+                    return response.json()
+                }).then(function(result){
+                    resolve(result.data.logPresenter)
+                })        
+        } catch (err){
+            resolve({err: "error occured while processing request"})
+        }
+    })
+}
+export function createPresenter({name,showName,email,time,photo}){
+    // must return a promise.
+    return new Promise(function(resolve,reject){
+        try{
+            fetch(process.env.API_LINK,
+                {
+                    body: JSON.stringify({
+                        //query : `{login(userName:${userName},password:${password})}`,
+                        query : `query presenterCreateQuery($name:String,$email:String,$showName:String,$time:String,$photo:String){presenterCreate(name:$name,email,$email,showName:$showName,time:$time,photo:$photo){err,object}}`,
                         variables : {
                             name:name,
                             showName:showName,
                             time:time,
-                            photo:photo
+                            photo:photo,
+                            email: email
                         }
                     }),
                     headers : {
