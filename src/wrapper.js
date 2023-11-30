@@ -111,6 +111,7 @@ export function Wrapper(){
 
 
     return (
+        <>
         <div style={{width: "100%",height: "60vh",position:"relative"}}>
         <div ref={circleWrapper} className="circle-wrapper">
             <div ref={outerCircle} className="circular">
@@ -121,6 +122,7 @@ export function Wrapper(){
                     <img src={dalaFmRounded} alt="avt"/>
                 </div>
             </div>
+        </div>
         </div>
         <div ref={majorWrapper} className="major-wrapper">
         <div className="upper-menu">
@@ -164,6 +166,6 @@ export function Wrapper(){
             </div>
         </div>
         </div>            
-        </div>
+        </>
     )
 }
