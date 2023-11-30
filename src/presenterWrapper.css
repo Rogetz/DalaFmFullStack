@@ -6,19 +6,6 @@
     box-sizing: border-box;
     user-select: none;
 }
-body{
-    width: 100%;
-    min-height: 100%;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    font-family: "Roboto-Bold", Times, serif;
-    background-color: rgba(255,255,255,1);
-}
 .major-wrapper{
     width: 100%;
     min-height: 100vh;
@@ -26,12 +13,19 @@ body{
     margin: 0;
     position: relative;
     font-size: 14px;
-    display: flex;
+    display: none;
+    visibility: hidden;
     align-items: center;
     flex-direction: column;
     font-family: "Roboto-Bold", Times, serif;
     background-color: rgba(255,255,255,1);
 }
+.major-wrapper.active{
+    display: flex;
+    visibility: visible;
+}
+
+
 .logo-div{
     margin: auto;
     width: 33rem;
@@ -353,29 +347,21 @@ a{
 }
 .live-video{
     width: 50rem;
-    height: 35rem;
+    height: 85vh;
     display: flex;
     flex-grow: 1;
     position: relative;
     margin-left: 1rem;
 }
-@media screen and (max-width: 591px) {
-    div.live-video{
-        width: 22rem;
-        height: 22rem;
-    }
-}
-.actual-video{
-    width: 100%;
-    height:100%;
-    object-fit: cover;
-    z-index: 2;
-}
-
 #live-logo{
     width: 3rem;
     height: 3rem;
     object-fit: cover;
+}
+.actual-video{
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 .station-tag{
     width: auto;
@@ -388,7 +374,7 @@ a{
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    z-index: 3;
+    z-index: 2;
 }
 .station-tag span{
     font-size: 1.5rem;
@@ -404,7 +390,7 @@ a{
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
-    z-index: 3;
+    z-index: 2;
 }
 .fa-dot-circle{
     font-size: 0.8rem;
@@ -430,7 +416,7 @@ a{
     align-items: center;
     gap: 0rem;
     padding: 0;
-    z-index: 3;
+    z-index: 2;
 }
 .sliding-highlights{
     margin: 0;
@@ -522,7 +508,6 @@ a{
     display: flex;
     justify-content: center;
 }
-
 .trending-videos{
     width: 93%;
     height: 40vh;
@@ -613,6 +598,12 @@ span.fa,span.fa-brands,span.fa-solid{
     border-radius: 1rem;
 }
 .single-video div{
+    z-index: 2;
+}
+.actual-video{
+    width: 100%;
+    height:100%;
+    object-fit: cover;
     z-index: 2;
 }
 .trendy-title{
@@ -708,4 +699,88 @@ a{
     .dala-div{
         font-size: 1rem;
     }
+}
+
+
+/*splash screen stylings*/
+
+.circular{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    /*position: absolute;
+    top: 20rem;
+    left: 10rem;*/
+    position: relative;
+    padding: 1rem;
+    z-index: 6;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0.01rem 0.01rem 0.5rem -1px blue,-0.01rem -0.01rem 0.5rem -1px black;
+}
+.circle-wrapper.hidden{
+    display: none;
+    visibility: hidden;
+}
+.circle-wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.circular.hidden{
+    display: none;
+    visibility: hidden;
+}
+div.circular svg.inner-svg{
+    fill: none;
+    stroke: rgba(0,0,255,0);
+    stroke-linecap: round;
+    /*actually realized that to change the scroll position simply modify the left part alone.*/
+    /*scroll-behavior: smooth;*/
+    position: absolute; 
+    top: -0.9rem;
+    left: -0.9rem;   
+    margin: auto;
+    stroke-width: 18px;
+    z-index: 1;
+    background-color: white;
+    stroke-dasharray: 0,453;
+    animation: splashAnime 5s alternate;
+}
+@keyframes splashAnime{
+    0%{
+        stroke: rgba(0,0,255,0);
+    }
+    25%{
+        stroke: rgba(0,0,255,0.25);
+    }
+    50%{
+        stroke: rgba(0,0,0,0.5);
+    }
+    75%{
+        stroke: rgba(255,0,255,0.75);
+    }
+    100%{
+        stroke: rgba(0,0,255,1);
+    }
+}
+.inner-circle{
+    z-index: 2;
+    background-color: transparent;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    box-shadow: inset 0.01rem 0.01rem 0.5rem -1px blue,inset -0.01rem -0.01rem 0.5rem -1px black;
+}
+.inner-circle img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;    
 }

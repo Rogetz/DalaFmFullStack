@@ -12,6 +12,11 @@ import { ContactUs } from "./contactUs";
 import {About} from "./about"
 import {Presenter} from "./presenter"
 import {Login} from "./login"
+import {AdminWrapper} from "./adminWrapper"
+import {PresenterWrapper} from "./presenterWrapper"
+import {PresenterHome} from "./presenterHome"
+import {AdminHome} from "./adminHome"
+import {PresenterAdmin} from "./presenterAdmin"
 
 let route = createBrowserRouter([
     {
@@ -41,6 +46,52 @@ let route = createBrowserRouter([
         path: "/login",
         element: <Login/>,
         errorElement: <ErrorElement/>
+    },
+    {
+        path : "/admin",
+        element: <AdminWrapper/>,
+        errorElement: <ErrorElement/>,
+        children : [
+            {
+                path: "/admin/",
+                element: <AdminHome/>
+            },
+            {
+                path: "contact",
+                element : <ContactUs/>
+            },
+            {
+                path: "about",
+                element: <About/>
+            },
+            {
+                path: "presenter",
+                element: <PresenterAdmin/>
+            }
+        ]
+    },
+    {
+        path: "/presenterDashboard",
+        element: <PresenterWrapper/>,
+        errorElement: <ErrorElement/>,
+        children: [
+            {
+                path: "/presenterDashboard/",
+                element: <PresenterHome/>
+            },
+            {
+                path: "contact",
+                element : <ContactUs/>
+            },
+            {
+                path: "about",
+                element: <About/>
+            },
+            {
+                path: "presenter",
+                element: <Presenter/>
+            }
+        ]
     }
 ])
 

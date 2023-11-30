@@ -4,11 +4,15 @@ import {logAdmin,logPresenter} from "./apis"
 import { FaCheckCircle, FaWindowClose } from "react-icons/Fa"
 import dalaFmRounded from "./dalaFm_rounded_logo.PNG"
 
+// find a way of redirecting a link,
+import {useNavigate} from "react-router-dom"
+
 // used both for the administrator and the regular presenter
 export function Login(){
     const [alertStyle,setAlertStyle] = useState(initialDisplay)
     // to tell whether the form is an admin form or not
     const [alertState,setAlertState] = useState("error")
+    const navigate = useNavigate()
     const [iconStyle,setIconStyle] = useState({backgroundColor:"red",color:"white"})
     const [notificationState,setNotificationState] = useState(null)
     const [wraperStyle,setWraperStyle] = useState({display: "none",visibility: "hidden"})
@@ -28,7 +32,7 @@ export function Login(){
                     setIconStyle({backgroundColor:"red",color: "white"})
                     setWraperStyle({display:"block",visibility: "visible"})
                     setTimeout(function(){
-                        setAlertStyle(initialDisplay)
+                        setAlertStyle(initialDisplay) 
                     },3000)    
                 }
                 else if(object != null){
@@ -39,6 +43,7 @@ export function Login(){
                     setWraperStyle({display:"block",visibility: "visible"})
                     setTimeout(function(){
                         setAlertStyle(initialDisplay)
+                        return navigate("/admin")
                     },3000)    
                 }
             }).catch(function(err){
@@ -70,6 +75,7 @@ export function Login(){
                     setWraperStyle({display:"block",visibility: "visible"})
                     setTimeout(function(){
                         setAlertStyle(initialDisplay)
+                        return navigate("/presenterDashboard")
                     },3000)    
                 }
             }).catch(function(err){

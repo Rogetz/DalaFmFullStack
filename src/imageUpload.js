@@ -24,7 +24,6 @@ export function ImageUpload(){
         fileReader.onerror = function(err){
             console.log("error occured when loading the file.")
         }
-    
     }
     // the file can be read on the onChange from the frontend but not on the onSubmit,since when you submit it's sent through a http action.
     let fileChangeHandler = async function(e){

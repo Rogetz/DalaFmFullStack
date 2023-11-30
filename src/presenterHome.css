@@ -114,22 +114,17 @@ body{
 }
 @media screen and (max-width: 591px){
     .main-div div.live-video{
-        width: 100%;
-        margin: 0;
-        height: 50vh;
-    }   
-    .main-div div.live-video video{
-        width: 100%;
-    } 
+        height: 60vh;
+    }    
     div.trending-videos{
-        width: 78%;
+        min-width: 50%;
         flex-wrap: nowrap;
     }
     div.trendy-wrapper{
         width: 96%;
     }
     div.single-video{
-        width: 98%;
+        width: 15rem;
         height: 36vh;    
         flex-grow: 0;
     }
@@ -334,6 +329,47 @@ a{
 }
 
 
+
+/*added lines*/
+.icon-div{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.presenter-tag{
+    color: blue;
+    font-weight: bolder;
+    margin-left: 0.5rem;
+}
+.presenter-tag:hover{
+    color: red;
+}
+.main-div .broadcast-button{
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    color: blue;
+    background-color: white;
+    border: none;
+    box-shadow: 0.1rem 0.1rem 0.5rem -5px blue,0.1rem 0.1rem 0.5rem -5px black;
+}
+button.hostName{
+    z-index: 3;
+    position: absolute;
+    top: 2.5rem;
+    left: 1rem;    
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    color: blue;
+    background-color: white;
+    border: none;
+    box-shadow: 0.1rem 0.1rem 0.5rem -5px blue,0.1rem 0.1rem 0.5rem -5px black;
+}
+/*added lines*/
+
+
 /* the video frame styling */
 .main-div{
     width: 100%;
@@ -346,7 +382,12 @@ a{
     box-sizing: border-box;
     overflow: hidden;
     padding: 0.5rem 0.5rem;
+    margin-bottom: 1rem;
+    justify-content: space-evenly;
+    gap: 2rem;
+    padding: 2rem;
 }
+
 .sliding-highlights{
     width: 100%;
     height: 1rem;
@@ -355,15 +396,9 @@ a{
     width: 50rem;
     height: 35rem;
     display: flex;
-    flex-grow: 1;
+    flex-shrink: 0;
     position: relative;
-    margin-left: 1rem;
-}
-@media screen and (max-width: 591px) {
-    div.live-video{
-        width: 22rem;
-        height: 22rem;
-    }
+    box-sizing: border-box;
 }
 .actual-video{
     width: 100%;
@@ -371,7 +406,12 @@ a{
     object-fit: cover;
     z-index: 2;
 }
-
+@media screen and (max-width: 591px) {
+    div.live-video{
+        width: 22rem;
+        height: 22rem;
+    }
+}
 #live-logo{
     width: 3rem;
     height: 3rem;
@@ -396,14 +436,10 @@ a{
 }
 .live-tag{
     position: absolute;
-    top: 2rem;
+    top: 0.2rem;
     left: 1rem;
     color: red;
     font-size: 1.3rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
     z-index: 3;
 }
 .fa-dot-circle{
@@ -413,7 +449,7 @@ a{
     width: auto;
     height: 100%;
     position: relative;
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: white;
     background-color: blue;
     padding: 0.5rem 1rem;
@@ -430,7 +466,7 @@ a{
     align-items: center;
     gap: 0rem;
     padding: 0;
-    z-index: 3;
+    z-index: 2;
 }
 .sliding-highlights{
     margin: 0;
@@ -448,11 +484,11 @@ a{
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
-    flex-grow: 1;
+    flex-grow: 0;
     background-color: transparent;
     padding: 2rem 2rem;
     position: relative;
-    margin-top: 2.5rem;
+    margin-top: 1.5rem;
     box-sizing: border-box;
     z-index: 1;
 }
@@ -512,87 +548,6 @@ a{
     font-size: 1.2rem;
     color: rgba(0,0,0,0.5);
 }
-.trendy-wrapper{
-    width: 98%;
-    height: 40vh;
-    margin: auto;
-    overflow: hidden;
-    position: relative;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-}
-
-.trending-videos{
-    width: 93%;
-    height: 40vh;
-    margin: 0;
-    padding: 0rem 1rem;
-    background-color: transparent;
-    margin-bottom: 0.5rem;
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    /*flex-wrap: nowrap;*/
-    box-sizing: border-box;
-    cursor: grab;
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-.trendy-wrapper .left-button{
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    background-color: black;
-    color: white;
-    position: absolute;
-    z-index: 3;
-    left: 0rem;
-    top: 45%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-.trendy-wrapper .left-button .fa{
-    font-size: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: blue;
-}
-span.fa,span.fa-brands,span.fa-solid{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.trendy-wrapper .right-button{
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    background-color: black;
-    color: white;
-    position: absolute;
-    z-index: 3;
-    right: 0rem;
-    top: 45%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-.trendy-wrapper .right-button .fa{
-    font-size: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: blue;
-}
-.trending-videos::-webkit-scrollbar{
-    display: none;
-}
 /*
 .trending-videos::-webkit-scrollbar:active{
     cursor: grab;
@@ -610,9 +565,14 @@ span.fa,span.fa-brands,span.fa-solid{
     border-radius: 0.5rem;
     position: relative;
     padding: 0.5rem;
-    border-radius: 1rem;
 }
 .single-video div{
+    z-index: 2;
+}
+.actual-video{
+    width: 100%;
+    height:100%;
+    object-fit: cover;
     z-index: 2;
 }
 .trendy-title{
@@ -652,8 +612,9 @@ span.fa,span.fa-brands,span.fa-solid{
 }
 .footer{
     width: 100%;
-    height: 20vh;
+    height: 26vh;
     padding: 0.5rem;
+    padding-top: 2rem;
     position: relative;
     bottom: 0rem;
     background-color: black;
@@ -708,4 +669,13 @@ a{
     .dala-div{
         font-size: 1rem;
     }
+}
+.footer .social-handles span.fa-youtube{
+    color: red;
+}
+.footer .social-handles span.fa-instagram{
+    color: brown;
+}
+.footer .social-handles span.fa-twitter{
+    color: rgba(0,150,255,1);
 }

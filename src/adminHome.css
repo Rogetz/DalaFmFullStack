@@ -1,0 +1,348 @@
+/*added lines*/
+@font-face {
+    font-family: Roboto-Bold;
+    src: url("./Roboto-Bold.ttf");
+}
+.icon-div{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.presenter-tag{
+    color: blue;
+    font-weight: bolder;
+    margin-left: 0.5rem;
+}
+.presenter-tag:hover{
+    color: red;
+}
+.main-div .broadcast-button{
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    color: blue;
+    background-color: white;
+    border: none;
+    box-shadow: 0.1rem 0.1rem 0.5rem -5px blue,0.1rem 0.1rem 0.5rem -5px black;
+}
+button.hostName{
+    z-index: 3;
+    position: absolute;
+    top: 2.5rem;
+    left: 1rem;    
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    color: blue;
+    background-color: white;
+    border: none;
+    box-shadow: 0.1rem 0.1rem 0.5rem -5px blue,0.1rem 0.1rem 0.5rem -5px black;
+}
+/*added lines*/
+
+
+/* the video frame styling */
+.main-div{
+    width: 100%;
+    min-height: 70vh;
+    margin-bottom: 0rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 0.5rem 0.5rem;
+    margin-bottom: 1rem;
+    justify-content: space-evenly;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.sliding-highlights{
+    width: 100%;
+    height: 1rem;
+}
+.live-video{
+    width: 35rem;
+    height: 35rem;
+    display: flex;
+    flex-shrink: 0;
+    position: relative;
+    box-sizing: border-box;
+}
+.actual-video{
+    width: 100%;
+    height:100%;
+    object-fit: cover;
+    z-index: 2;
+}
+
+@media screen and (max-width: 591px) {
+    div.live-video{
+        width: 22rem;
+        height: 22rem;
+    }
+}
+#live-logo{
+    width: 3rem;
+    height: 3rem;
+    object-fit: cover;
+}
+.station-tag{
+    width: auto;
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-items: center;
+    gap: 0.5rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 3;
+}
+.station-tag span{
+    font-size: 1.5rem;
+    color: blue;
+}
+.live-tag{
+    position: absolute;
+    top: 0.2rem;
+    left: 1rem;
+    color: red;
+    font-size: 1.3rem;
+    z-index: 3;
+}
+.fa-dot-circle{
+    font-size: 0.8rem;
+}
+.current-show-name{
+    width: auto;
+    height: 100%;
+    position: relative;
+    font-size: 1rem;
+    color: white;
+    background-color: blue;
+    padding: 0.5rem 1rem;
+    margin: 0;
+}
+.bottom-slide-wrapper{
+    width: 98%;
+    height: 3rem;
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0rem;
+    padding: 0;
+    z-index: 2;
+}
+.sliding-highlights{
+    margin: 0;
+    width: 79%;
+    height: 100%;
+    position: relative;
+    background-color: black;
+    color: white; 
+    display: flex;
+    align-items: center;   
+}
+.current-presenter-portfolio{
+    width: 25rem;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    flex-grow: 1;
+    background-color: transparent;
+    padding: 2rem 2rem;
+    position: relative;
+    margin-top: 1.5rem;
+    box-sizing: border-box;
+    z-index: 1;
+}
+.current-presenter-portfolio h2.presentation-title{
+    color: rgba(0,0,255,1);
+    text-align: center;    
+}
+.actual-presenter-wrapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    z-index: 1;
+    margin: 0;
+    background-color: rgba(0,0,255,0.1);
+    border-radius: 0.5rem;
+    box-shadow: 0.01rem 0.01rem 0.2rem black;
+}
+.img-wrapper{
+    width: 100%;
+    height: 50%;
+    position: relative;
+}
+.background-div{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.presenter-img{
+    position: absolute;
+    bottom: -10%;
+    left: 7rem;
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    border-radius: 50%;
+    z-index: 2;
+}
+.presenter-title{
+    color: rgba(0,0,255,1);
+    font-size: 1.2rem;
+    text-align: center;
+}
+.current-presenter-portfolio .bottom-div{
+    position: relative;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0rem 1rem;
+}
+.presenter-bio{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.2rem;
+    color: rgba(0,0,0,0.5);
+}
+/*
+.trending-videos::-webkit-scrollbar:active{
+    cursor: grab;
+}*/
+.single-video{
+    display: flex;
+    flex-shrink: 0;
+    flex-grow: 1;
+    width: 19rem;
+    height: 38vh;
+    overflow: hidden;
+    background-color: rgba(0,0,255,0.1);
+    background-image: url("./nairobi-town.jpg");
+    background-size: cover;
+    border-radius: 0.5rem;
+    position: relative;
+    padding: 0.5rem;
+}
+.single-video div{
+    z-index: 2;
+}
+.trendy-title{
+    color: white;
+    background-color: blue;
+    width: fit-content;
+    height: fit-content;
+    padding: 0.5rem 1rem;
+}
+.bottom-div{
+    width: 94%;
+    height: 50%;
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    overflow: hidden;
+    z-index: 3;
+}
+.bottom-div .news-title{
+    font-size: 1.4rem;
+    width: 100%;
+    height: 1.8rem;
+    overflow: hidden;
+    text-align: center;
+    font-weight: bold;
+    color: rgba(0,0,0,1);
+}
+.bottom-div .news-details{
+    font-size: 1rem;
+    width: 100%;
+    height: 2.6rem;
+    overflow: hidden;
+    text-align: center;
+    font-weight: lighter;
+    color: rgba(0,0,0,0.5);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.footer{
+    width: 100%;
+    height: 26vh;
+    padding: 0.5rem;
+    padding-top: 2rem;
+    position: relative;
+    bottom: 0rem;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    gap: 1rem;
+}
+.social-handles{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    color: blue;
+    font-size: 2.5rem;
+    width: auto;
+    height: auto;
+    align-items: center;
+    overflow: hidden;
+}
+.copyright-info{
+    color: white;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+}
+.copyright-class{
+    display: flex;
+    gap: 1rem;
+}
+.dala-div{
+    color: blue;
+}
+a{
+    color: blue;
+    text-decoration: none;
+}
+@media screen and (max-width:991px) {
+    .social-handles{
+        font-size: 1.4rem;
+    }  
+    .copyright-info{
+        font-size: 0.6rem;  
+        gap: 1rem;   
+    }
+    .copyright-class{
+        font-size: 1rem;
+    } 
+    .dala-div{
+        font-size: 1rem;
+    }
+}
+.footer .social-handles span.fa-youtube{
+    color: red;
+}
+.footer .social-handles span.fa-instagram{
+    color: brown;
+}
+.footer .social-handles span.fa-twitter{
+    color: rgba(0,150,255,1);
+}
