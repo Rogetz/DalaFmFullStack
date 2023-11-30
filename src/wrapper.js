@@ -113,6 +113,9 @@ export function Wrapper(){
     let splashWrapperStyling = {
         width: "100%",
         height: "60vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         position:"relative"
     }
     let finalSplashWrapperStyle = {
