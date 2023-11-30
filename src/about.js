@@ -2,6 +2,7 @@ import "./about.css"
 import  portrait5 from "./portrait5removed.png"
 import dalaRemoved from "./dalaFmActualRemoved.png"
 import React from "react"
+import { FaFootballBall, FaMicrophone, FaMusic } from "react-icons/fa"
 
 
 export function About(){
@@ -14,17 +15,17 @@ export function About(){
                 <p>welcome to your modern station where we collect the realest,use the natural ingredients, cook it sensationally, spice it up and air it hot. Welcome to Dala fm </p>
                 <div className="actual-about-section">
                     <div className="about-card">
-                        <span className="fa fa-microphone"></span>
+                        <span className="fa fa-microphone"><FaMicrophone/></span>
                         <div className="point-intro">We offer 24/7 airing services</div>
                         <div className="point-elaboration">We'll always keep you informed as soon as we are and save you the tussle of misinformation</div>
                     </div>
                     <div className="about-card">
-                        <span className="fa fa-music"></span>
+                        <span className="fa fa-music"><FaMusic/></span>
                         <div className="point-intro">We have a taste for music</div>
                         <div className="point-elaboration">Enjoy the best tunew from the best. Call us the home of local and international entertainment</div>
                     </div>
                     <div className="about-card">
-                        <span className="fa fa-football"></span>
+                        <span className="fa fa-football"><FaFootballBall/></span>
                         <div className="point-intro">We are your home of sports</div>
                         <div className="point-elaboration">we know the value of sports and physical training, so we give you the juicy part of sports locally and internationally.</div>
                     </div>    
