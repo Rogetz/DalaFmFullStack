@@ -1,7 +1,7 @@
 import React,{useState,useEffect,useRef} from "react"
 import "./login.css"
 import {logAdmin,logPresenter} from "./apis"
-import { FaCheckCircle, FaWindowClose } from "react-icons/Fa"
+import { FaCheckCircle, FaWindowClose } from "react-icons/fa"
 import dalaFmRounded from "./dalaFm_rounded_logo.PNG"
 
 // find a way of redirecting a link,
