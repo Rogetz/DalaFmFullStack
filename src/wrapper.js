@@ -129,10 +129,10 @@ export function Wrapper(){
                 <div className="brand-name">DALA FM</div>
             </div>
             <div className="other-options">      
-                <div className="opt"><span className="fa fa-home"><FaHome/></span><a href="#">Home</a> </div>
-                <div className="opt"><span className="fa fa-newspaper"><FaNewspaper/></span><a href="./news.html">News</a></div>
-                <div className="opt"><span className="fa fa-timeline"><FaProjectDiagram/></span><a href="./programs.html">programms</a></div>
-                <div className="opt"><span className="fa-solid fa-volume-high"><FaVolumeUp/></span><a href="./advertise.html">Advertise with us</a></div>
+                <div className="opt"><span className="fa fa-home"><FaHome/></span><Link to="/">Home</Link> </div>
+                <div className="opt"><span className="fa fa-newspaper"><FaNewspaper/></span><a href="#">News</a></div>
+                <div className="opt"><span className="fa fa-timeline"><FaProjectDiagram/></span><a href="#">programms</a></div>
+                <div className="opt"><span className="fa-solid fa-volume-high"><FaVolumeUp/></span><a href="#">Advertise with us</a></div>
                 <div className="opt"><span className="fa fa-phone"><FaPhone/></span><Link to="contact">contact us</Link></div>
                 <div className="opt"><span className="fa fa-info-circle"><FaInfoCircle/></span><Link to="about">About</Link></div>
                 <div className="opt"><span className="fa fa-microphone"><FaMicrophone/></span><Link to="presenter">presenters</Link></div>
@@ -141,10 +141,10 @@ export function Wrapper(){
             <span ref={menuButton} onClick={menuHandler} className="fa fa-bars"><FaBars/></span>
             <span ref={cancelButton} onClick={cancelHandler} className="fa fa-close hidden"><FaWindowClose/></span>
             <div ref={options} className="toggled-menu">
-                <div className="opt"><span className="fa fa-home"><FaHome/></span><a href="#">Home</a> </div>
-                <div className="opt"><span className="fa fa-newspaper"><FaNewspaper/></span><a href="./news.html">News</a></div>
-                <div className="opt"><span className="fa fa-timeline"><FaProjectDiagram/></span><a href="./programs.html">programms</a></div>
-                <div className="opt"><span className="fa-solid fa-volume-high"><FaVolumeUp/></span><a href="./advertise.html">Advertise with us</a></div>
+                <div className="opt"><span className="fa fa-home"><FaHome/></span><Link to="/">Home</Link> </div>
+                <div className="opt"><span className="fa fa-newspaper"><FaNewspaper/></span><a href="#">News</a></div>
+                <div className="opt"><span className="fa fa-timeline"><FaProjectDiagram/></span><a href="#">programms</a></div>
+                <div className="opt"><span className="fa-solid fa-volume-high"><FaVolumeUp/></span><a href="#">Advertise with us</a></div>
                 <div className="opt"><span className="fa fa-phone"><FaPhone/></span><Link to="contact">contact us</Link></div>
                 <div className="opt"><span className="fa fa-info-circle"><FaInfoCircle/></span><Link to="about">About</Link></div>
                 <div className="opt"><span className="fa fa-microphone"><FaMicrophone/></span><Link to="presenter">presenters</Link></div>
