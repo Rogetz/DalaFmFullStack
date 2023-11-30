@@ -711,6 +711,7 @@ a{
     /*position: absolute;
     top: 20rem;
     left: 10rem;*/
+    top: 5rem;
     position: relative;
     padding: 1rem;
     z-index: 6;
