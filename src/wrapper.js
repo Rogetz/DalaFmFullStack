@@ -12,6 +12,7 @@ export function Wrapper(){
     let menuButton = useRef()
     let cancelButton = useRef()
     let options = useRef()
+    const [splashStyleState,setSplashStyleState] = useState(splashWrapperStyling)
     const svg = useRef()
     const outerCircle = useRef()
     const circleWrapper = useRef()
@@ -54,6 +55,7 @@ export function Wrapper(){
         outerCircle.current.classList.add("hidden")
         circleWrapper.current.classList.add("hidden")
         majorWrapper.current.classList.add("active")
+        setSplashStyleState(finalSplashWrapperStyle)
     },finalTimeout)
 
     let splash = `<div ref={outerCircle} className="circular">
@@ -108,11 +110,22 @@ export function Wrapper(){
     </div>
     </div>
     `
-
+    let splashWrapperStyling = {
+        width: "100%",
+        height: "60vh",
+        position:"relative"
+    }
+    let finalSplashWrapperStyle = {
+        width: "100%",
+        height: "60vh",
+        position:"relative",
+        display: "none",
+        visibility: "hidden"  
+    }
 
     return (
         <>
-        <div style={{width: "100%",height: "60vh",position:"relative"}}>
+        <div style={splashStyleState}>
         <div ref={circleWrapper} className="circle-wrapper">
             <div ref={outerCircle} className="circular">
                 <svg ref={svg} className="inner-svg" width="190" height="190">
