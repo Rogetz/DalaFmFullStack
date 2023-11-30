@@ -1,7 +1,7 @@
 import React,{useEffect,useRef,useState} from "react"
 import "./adminWrapper.css"
 import {Link,Outlet} from "react-router-dom"
-import {FaBars, FaCaretLeft,FaCaretRight,FaProjectDiagram,FaHeadphones,FaHome,FaNewspaper,FaVolumeUp,FaPhone,FaMicrophone, FaInfoCircle, FaTv, FaUserCircle, FaWindowClose, FaInstagram, FaLinkedin, FaYoutube, FaCopyright, FaTwitter} from "react-icons/Fa"
+import {FaBars, FaCaretLeft,FaCaretRight,FaProjectDiagram,FaHeadphones,FaHome,FaNewspaper,FaVolumeUp,FaPhone,FaMicrophone, FaInfoCircle, FaTv, FaUserCircle, FaWindowClose, FaInstagram, FaLinkedin, FaYoutube, FaCopyright, FaTwitter} from "react-icons/fa"
 import dalaFmRounded from  "./dalaFm_rounded_logo.PNG"
 import musicStudio from "./music_studio.jpg"
 import presenter2 from "./presenter-2.PNG"

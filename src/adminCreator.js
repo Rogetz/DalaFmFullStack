@@ -1,7 +1,7 @@
 import React,{useState,useRef,useEffect} from "react"
 import "./adminCreator.css"
 import {createAdmin} from "./apis"
-import { FaCheckCircle, FaWindowClose } from "react-icons/Fa"
+import { FaCheckCircle, FaWindowClose } from "react-icons/fa"
 import dalaFmRounded from  "./dalaFm_rounded_logo.PNG"
 
 export function AdminCreator(){
