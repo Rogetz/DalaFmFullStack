@@ -1,7 +1,7 @@
 import React,{useEffect,useRef,useState} from "react"
 import "./wrapper.css"
 import {Link,Outlet} from "react-router-dom"
-import {FaBars, FaCaretLeft,FaCaretRight,FaProjectDiagram,FaHeadphones,FaHome,FaNewspaper,FaVolumeUp,FaPhone,FaMicrophone, FaInfoCircle, FaTv, FaUserCircle, FaWindowClose, FaInstagram, FaLinkedin, FaYoutube, FaCopyright, FaTwitter} from "react-icons/fa"
+import {FaBars, FaCaretLeft,FaCaretRight,FaProjectDiagram,FaHeadphones,FaHome,FaNewspaper,FaVolumeUp,FaPhone,FaMicrophone, FaInfoCircle, FaTv, FaUserCircle, FaWindowClose, FaInstagram, FaLinkedin, FaYoutube, FaCopyright, FaTwitter, FaFacebook} from "react-icons/fa"
 import dalaFmRounded from  "./dalaFm_rounded_logo.PNG"
 import musicStudio from "./music_studio.jpg"
 import presenter2 from "./presenter-2.PNG"
@@ -171,10 +171,10 @@ export function Wrapper(){
             <Outlet/>
         <div className="footer">
             <div className="social-handles">
-                <span className="fa-brands fa-instagram"><FaInstagram/></span>
-                <span className="fa-brands fa-twitter"><FaTwitter/></span>
-                <span className="fa-brands fa-linkedin"><FaLinkedin/></span>
-                <span className="fa-brands fa-youtube"><FaYoutube/></span>
+            <a href="https://www.instagram.com/dalafmkenya/"><span className="fa-brands fa-instagram"><FaInstagram/></span></a>
+            <a href="https://twitter.com/dalafmKenya"><span className="fa-brands fa-twitter"><FaTwitter/></span></a>
+                <a href="https://www.facebook.com/DalaFMKenya/"><span className="fa-brands fa-linkedin"><FaFacebook/></span></a>
+                <a href="https://www.youtube.com/channel/UCKUwFjzvsoICHf8NmVDBrcw"><span className="fa-brands fa-youtube"><FaYoutube/></span></a>
             </div>
             <div className="copyright-info">
                 <div className="copyright-class">copyright<span className="fa fa-copyright"><FaCopyright/></span> 2023</div> 
