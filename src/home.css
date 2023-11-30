@@ -618,9 +618,11 @@ span.fa,span.fa-brands,span.fa-solid{
 .trendy-title{
     color: white;
     background-color: blue;
+    border-radius: 2rem;
     width: fit-content;
     height: fit-content;
     padding: 0.5rem 1rem;
+    margin-bottom: 2rem;
 }
 .bottom-div{
     width: 94%;
