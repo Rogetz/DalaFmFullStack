@@ -7,25 +7,14 @@ import { Link } from "react-router-dom";
 import dalaFmRounded from  "./dalaFm_rounded_logo.PNG"
 import musicStudio from "./music_studio.jpg"
 import presenter2 from "./presenter-2.PNG"
+import {io} from "socket.io-client"
+import Peer from "simple-peer"
 
 export function Home(){
-    let menuButton = useRef()
-    let cancelButton = useRef()
-    let options = useRef()
 
     let trendingVideos = useRef([])
     let leftButtons = useRef([])
     let rightButtons = useRef([])
-    let menuHandler = function(e){
-        options.current.classList.add("active")
-        menuButton.current.classList.add("hidden")
-        cancelButton.current.classList.remove("hidden")
-    }
-    let cancelHandler = function(e){
-        options.current.classList.remove("active")
-        cancelButton.current.classList.add("hidden")
-        menuButton.current.classList.remove("hidden")  
-    }
     useEffect(function(){ 
 
         leftButtons.current.forEach(function(leftButton,index){
@@ -51,15 +40,7 @@ export function Home(){
                 <div className="listen-now"><span className="fa fa-headphones"><FaHeadphones/></span>listen live</div>
             </div>
             <div className="main-div">
-                <div className="live-video">
-                    <div className="station-tag"><img id="live-logo" src="dalaFm_rounded_logo.PNG" alt=""/> <span>DALA FM</span></div>
-                    <div className="live-tag">LIVE <span className="fa fa-dot-circle"></span> </div>
-                    <video src="" className="actual-video" autoPlay></video>
-                    <div className="bottom-slide-wrapper">
-                        <div className="current-show-name">Mos Gi Tich</div>
-                        <marquee className="sliding-highlights" behavior="scroll" loop="infinite" direction="right" hspace="10%">Kenya National swimming team competing for the world cup finally.Reportedly ther have been 20 mend found dancing in the rain. New stock market statistics to watch. Harrambee stars the nwe world cup qualifiers.</marquee>
-                    </div>
-                </div>
+                <LiveStream/>
                 <div className="current-presenter-portfolio">
                     <h2 className="presentation-title">current presenter profile</h2>
                     <div className="actual-presenter-wrapper">
@@ -266,4 +247,74 @@ export function Home(){
         </>
     )
 }
+
+function LiveStream(){
+    const videoRef = useRef()
+    const currentStreamRef = useRef()
+
+    useEffect(function(){
+        const socket = io("ws://localhost:4037")
+        // immediately announce presenter-join, share its Id to the admin that is present
+        // remember that in this case there should be no more than one admin since that will cause an error.
+        socket.emit("viewer-join","")
+        socket.on("admin-accepted",function({socketId}){
+            // so for each request that comes with an admin-accepted a new peer is created,
+            //and it must come with the particular socketId to send the request.
+            const peer = new Peer({initiator: true,trickle:true})
+            let currentPeerToCall = socketId
+        
+            peer.on("signal",function(signal){
+                socket.emit("peer-call",{to:currentPeerToCall,signal:signal})
+            })
+            socket.on("answered-peer",function({socketId,signal}){
+                peer.signal(signal)
+                currentPeerToCall = socketId
+            })
+            peer.on("connect",function(){
+                console.log("connection to admin established")
+            })
+            peer.on("stream",function(stream){
+                videoRef.current.srcObject = stream
+            })
+            peer.on("close",function(){
+                console.log("connection closed")
+            })
+            peer.on("end",function(){
+                console.log("connection ended")
+            })    
+        })
+    },[])
+
+    let leaveCallHandler = function(e){
+        e.preventDefault()
+        connectionRef.current.destroy()        
+    }
+
+    let liveStreamHandler = function(e){
+        window.navigator.mediaDevices.getUserMedia({video: true,audio:false}).then(function(stream){
+            //videoRef.current.srcObject = stream 
+            //setCurrentStream(stream)
+            // the test of the treaty
+            currentStreamRef.current = stream
+            // testing to see if setting the stream to this works amd using the ref works perfectly fine,lets see what's wrong.
+            videoRef.current.srcObject = currentStreamRef.current
+        }).catch(function(err){
+            console.log("some error occured during streaming")
+        })
+    }
+
+    return (
+        <div className="live-video">
+            <div className="station-tag"><img id="live-logo" src={dalaFmRounded} alt=""/> <span>DALA FM</span></div>
+            <div className="live-tag"><button className="broadcast-button">share screen</button> </div>
+            <button className="hostName">Tom Okwiri</button>
+            <video ref={videoRef} src="" className="actual-video" autoPlay="true"></video>
+            <div className="bottom-slide-wrapper">
+                <div className="current-show-name">Mos Gi Tich</div>
+                <marquee className="sliding-highlights" behavior="scroll" loop="infinite" direction="right" hspace="10%">Kenya National swimming team competing for the world cup finally.Reportedly ther have been 20 mend found dancing in the rain. New stock market statistics to watch. Harrambee stars the nwe world cup qualifiers.</marquee>
+            </div>
+        </div> 
+    )
+}
+
 
