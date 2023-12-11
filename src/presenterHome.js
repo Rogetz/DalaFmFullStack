@@ -104,7 +104,7 @@ function LivePresenter(){
             <div className="station-tag"><img id="live-logo" src={dalaFmRounded} alt=""/> <span>DALA FM</span></div>
             <div className="live-tag"><button className="broadcast-button">share screen</button> </div>
             <button className="hostName">Tom Okwiri</button>
-            <video ref={videoRef} src="" className="actual-video" autoPlay="true"></video>
+            <video ref={videoRef} src="" className="actual-video" autoPlay={true}></video>
             <div className="bottom-slide-wrapper">
                 <div className="current-show-name">Mos Gi Tich</div>
                 <marquee className="sliding-highlights" behavior="scroll" loop="infinite" direction="right" hspace="10%">Kenya National swimming team competing for the world cup finally.Reportedly ther have been 20 mend found dancing in the rain. New stock market statistics to watch. Harrambee stars the nwe world cup qualifiers.</marquee>

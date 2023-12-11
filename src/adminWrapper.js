@@ -12,7 +12,7 @@ export function AdminWrapper(){
     let menuButton = useRef()
     let cancelButton = useRef()
     let options = useRef()
-    const svg = useRef()
+    const svgRef = useRef()
     const outerCircle = useRef()
     const circleWrapper = useRef()
     const majorWrapper = useRef()
@@ -36,25 +36,27 @@ export function AdminWrapper(){
     // remember to also calculate the circumference first so that you can get the actual calculations for the offset.
     // remember that the offset is actually the circumference calculated through the radius that you've set for the circle.
     */
-    let finalTimeout = 5000
-    // interval for the repeated setIntervals
-    let interval = finalTimeout / 30
-    // gap for the progress bar.
-    let gap = offSet / 10
-    // interval result
-    let intervalResult = setInterval(function(){
-        actualProgress += gap
-        if(actualProgress >= offSet){
-            actualProgress = 0
-        }    
-        svg.current.style.strokeDasharray = `${actualProgress},${offSet}`
-    },interval)
-    setTimeout(function(){
-        clearInterval(intervalResult)
-        outerCircle.current.classList.add("hidden")
-        circleWrapper.current.classList.add("hidden")
-        majorWrapper.current.classList.add("active")
-    },finalTimeout)
+    useEffect(function(){
+        let finalTimeout = 5000
+        // interval for the repeated setIntervals
+        let interval = finalTimeout / 30
+        // gap for the progress bar.
+        let gap = offSet / 10
+        // interval result
+        let intervalResult = setInterval(function(){
+            actualProgress += gap
+            if(actualProgress >= offSet){
+                actualProgress = 0
+            }    
+            svgRef.current.style.strokeDasharray = `${actualProgress},${offSet}`
+        },interval)
+        setTimeout(function(){
+            clearInterval(intervalResult)
+            outerCircle.current.classList.add("hidden")
+            circleWrapper.current.classList.add("hidden")
+            majorWrapper.current.classList.add("active")
+        },finalTimeout)
+   },[])
 
     let splash = `<div ref={outerCircle} className="circular">
         <svg ref={svg} className="inner-svg" width="190", height="190">
@@ -114,7 +116,7 @@ export function AdminWrapper(){
         <div style={{width: "100%",height: "60vh",position:"relative"}}>
         <div ref={circleWrapper} className="circle-wrapper">
             <div ref={outerCircle} className="circular">
-                <svg ref={svg} className="inner-svg" width="190" height="190">
+                <svg ref={svgRef} className="inner-svg" width="190" height="190">
                     <circle cx="95" cy="95" r="72"/>
                 </svg>
                 <div className="inner-circle">

@@ -277,7 +277,7 @@ body{
     color: white;
     border-radius: 2rem;
     overflow: hidden;
-    z-index: 3;
+    z-index: 20;
 }
 .live-stream span.fa{
     margin-right: 0.5rem;
@@ -405,7 +405,10 @@ a{
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
-    z-index: 3;
+    z-index: 5;
+}
+div.live-tag{
+    z-index: 5;
 }
 .fa-dot-circle{
     font-size: 0.8rem;
@@ -432,6 +435,11 @@ a{
     gap: 0rem;
     padding: 0;
     z-index: 3;
+}
+.live-video button.hostName{
+    position: absolute;
+    top: 4.5rem;
+    left: 2rem;
 }
 .sliding-highlights{
     margin: 0;

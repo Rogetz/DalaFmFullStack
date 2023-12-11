@@ -33,6 +33,7 @@ export function Login(){
                     setWraperStyle({display:"block",visibility: "visible"})
                     setTimeout(function(){
                         setAlertStyle(initialDisplay) 
+                        return navigate("/admin")
                     },3000)    
                 }
                 else if(object != null){
@@ -43,7 +44,6 @@ export function Login(){
                     setWraperStyle({display:"block",visibility: "visible"})
                     setTimeout(function(){
                         setAlertStyle(initialDisplay)
-                        return navigate("/admin")
                     },3000)    
                 }
             }).catch(function(err){
@@ -65,6 +65,7 @@ export function Login(){
                     setWraperStyle({display:"block",visibility: "visible"})
                     setTimeout(function(){
                         setAlertStyle(initialDisplay)
+                        return navigate("/presenterDashboard")
                     },3000)    
                 }
                 else if(object != null){
@@ -75,7 +76,6 @@ export function Login(){
                     setWraperStyle({display:"block",visibility: "visible"})
                     setTimeout(function(){
                         setAlertStyle(initialDisplay)
-                        return navigate("/presenterDashboard")
                     },3000)    
                 }
             }).catch(function(err){
@@ -105,6 +105,8 @@ export function Login(){
         position: "absolute",
         top: "0rem",
         left: "0rem",
+        width: "100%",
+        height: "auto",
         zIndex: "5",
         backgroundColor: "green",
         color: "white",
@@ -118,6 +120,8 @@ export function Login(){
         position: "absolute",
         top: "0rem",
         left: "0rem",
+        width: "100%",
+        height: "auto",
         zIndex: "5",
         backgroundColor: "red",
         color: "white",

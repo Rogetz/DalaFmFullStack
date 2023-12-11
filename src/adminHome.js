@@ -18,12 +18,14 @@ export function AdminHome(){
         socket1.on("presenter-joined",function({socketId}){
             // create a new socket and peer and send admin details there
             // make the live components an array snd add an item to it.
-            if(LiveComponents == undefined){
-                let newArray = [`<${LiveComponent} key={${(Math.random(10000))}} data={socketId:${socketId}}/>`]
+            if(LiveComponents == undefined || LiveComponents == null){
+                console.log("the liveComponents is null here.")
+                let newArray = [`<${LiveComponent} key={{${(Math.random(10000))}}} data={{socketId:${socketId}}}/>`]
                 setLiveComponents(newArray)
             }
             else{
-                let newArray = [`<${LiveComponent} key={${(Math.random(10000))}} data={socketId:${socketId}}/>`]
+                console.log("the liveComponents is not null here.")
+                let newArray = [`<${LiveComponent} key={{${(Math.random(10000))}}} data={{socketId:${socketId}}}/>`]
                 let newestArray = newArray.concat(LiveComponents)
                 setLiveComponents(newestArray)
             }
@@ -106,7 +108,7 @@ function LiveComponent(){
             <div className="station-tag"><img id="live-logo" src={dalaFmRounded} alt=""/> <span>DALA FM</span></div>
             <div className="live-tag"><button className="broadcast-button">broadcast</button> </div>
             <button className="hostName">Tom Okwiri</button>
-            <video ref={videoRef} src="" className="actual-video" autoPlay="true"></video>
+            <video ref={videoRef} src="" className="actual-video" autoPlay={true}></video>
             <div className="bottom-slide-wrapper">
                 <div className="current-show-name">Mos Gi Tich</div>
                 <marquee className="sliding-highlights" behavior="scroll" loop="infinite" direction="right" hspace="10%">Kenya National swimming team competing for the world cup finally.Reportedly ther have been 20 mend found dancing in the rain. New stock market statistics to watch. Harrambee stars the nwe world cup qualifiers.</marquee>

@@ -55,7 +55,7 @@ socketServer.on("connection",function(socket){
     /*new server data */
     socket.on("presenter-join",function(){
         // broadcast to all channels, notice that only the admin will be able to interpret this.
-        socket.broadcast("presenter-joined",{socketId: socket.id})
+        socketServer.emit("presenter-joined",{socketId: socket.id})
     })
     socket.on("admin-accept",function({to}){
         // send the presenter the admin Id that he can use to communicate.
@@ -68,16 +68,16 @@ socketServer.on("connection",function(socket){
         socketServer.to(to).emit("answered-peer",{socketId:socket.id,signal:signal})
     })
     socket.on("viewer-join",function(){
-        socket.broadcast("viewer-joined",{socketId:socket.id})
+        socketServer.emit("viewer-joined",{socketId:socket.id})
     })
     socket.on("viewer-accept",function({to}){
-        socketServer.to(to)("viewer-accepted",{socketId:socket.id})
+        socketServer.to(to).emit("viewer-accepted",{socketId:socket.id})
     })
     socket.on("viewer-call",function({to,signal}){
         socketServer.to(to).emit("viewer-called",{socketId:socket.id,signal:signal})
     })
     socket.on("answering-viewer",function({to,signal}){
-        socketServer.to(to).emit("answered-viewer",{socketId:socket.id,signal:signal}))
+        socketServer.to(to).emit("answered-viewer",{socketId:socket.id,signal:signal})
     })
     // the frontend part of the viewer
     /*
