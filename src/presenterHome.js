@@ -54,10 +54,13 @@ function LivePresenter(){
         // immediately announce presenter-join, share its Id to the admin that is present
         // remember that in this case there should be no more than one admin since that will cause an error.
         socket.emit("presenter-join","")
+        socket.on("admin-joined",function(){
+            socket.emit("presenter-join","")
+        })
         socket.on("admin-accepted",function({socketId}){
             // so for each request that comes with an admin-accepted a new peer is created,
             //and it must come with the particular socketId to send the request.
-            const peer = new Peer({initiator: true,trickle:true})
+            const peer = new Peer({initiator: true,trickle:true,stream:currentStreamRef.current})
             let currentPeerToCall = socketId
         
             peer.on("signal",function(signal){
@@ -70,7 +73,8 @@ function LivePresenter(){
             peer.on("connect",function(){
                 console.log("connection to admin established")
                 // currentStream Ref should be a ref as it is.
-                peer.addStream(currentStreamRef.current)
+                // I intend to use this peer.addStream when there's an internet connection since I feel it only works when there's internet connection.
+                //peer.addStream(currentStreamRef.current)
             })
             peer.on("close",function(){
                 console.log("connection closed")
@@ -97,12 +101,45 @@ function LivePresenter(){
         }).catch(function(err){
             console.log("some error occured during streaming")
         })
+        const socket = io("ws://localhost:4037")
+        // immediately announce presenter-join, share its Id to the admin that is present
+        // remember that in this case there should be no more than one admin since that will cause an error.
+        socket.emit("presenter-join","")
+        socket.on("admin-joined",function(){
+            socket.emit("presenter-join","")
+        })
+        socket.on("admin-accepted",function({socketId}){
+            // so for each request that comes with an admin-accepted a new peer is created,
+            //and it must come with the particular socketId to send the request.
+            const peer = new Peer({initiator: true,trickle:true,stream:currentStreamRef.current})
+            let currentPeerToCall = socketId
+        
+            peer.on("signal",function(signal){
+                socket.emit("peer-call",{to:currentPeerToCall,signal:signal})
+            })
+            socket.on("answered-peer",function({socketId,signal}){
+                peer.signal(signal)
+                currentPeerToCall = socketId
+            })
+            peer.on("connect",function(){
+                console.log("connection to admin established")
+                // currentStream Ref should be a ref as it is.
+                // I intend to use this peer.addStream when there's an internet connection since I feel it only works when there's internet connection.
+                //peer.addStream(currentStreamRef.current)
+            })
+            peer.on("close",function(){
+                console.log("connection closed")
+            })
+            peer.on("end",function(){
+                console.log("connection ended")
+            })    
+        })
     }
 
     return (
         <div className="live-video">
-            <div className="station-tag"><img id="live-logo" src={dalaFmRounded} alt=""/> <span>DALA FM</span></div>
-            <div className="live-tag"><button className="broadcast-button">share screen</button> </div>
+            <div className="presenter-station-tag"><img id="live-logo" src={dalaFmRounded} alt=""/> <span>DALA FM</span></div>
+            <div className="live-tag" onClick={liveStreamHandler}><button className="broadcast-button">share screen</button> </div>
             <button className="hostName">Tom Okwiri</button>
             <video ref={videoRef} src="" className="actual-video" autoPlay={true}></video>
             <div className="bottom-slide-wrapper">

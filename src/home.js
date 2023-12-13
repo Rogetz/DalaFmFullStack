@@ -250,39 +250,11 @@ export function Home(){
 
 function LiveStream(){
     const videoRef = useRef()
-    const currentStreamRef = useRef()
 
     useEffect(function(){
         const socket = io("ws://localhost:4037")
         // immediately announce presenter-join, share its Id to the admin that is present
         // remember that in this case there should be no more than one admin since that will cause an error.
-        socket.emit("viewer-join","")
-        socket.on("admin-accepted",function({socketId}){
-            // so for each request that comes with an admin-accepted a new peer is created,
-            //and it must come with the particular socketId to send the request.
-            const peer = new Peer({initiator: true,trickle:true})
-            let currentPeerToCall = socketId
-        
-            peer.on("signal",function(signal){
-                socket.emit("peer-call",{to:currentPeerToCall,signal:signal})
-            })
-            socket.on("answered-peer",function({socketId,signal}){
-                peer.signal(signal)
-                currentPeerToCall = socketId
-            })
-            peer.on("connect",function(){
-                console.log("connection to admin established")
-            })
-            peer.on("stream",function(stream){
-                videoRef.current.srcObject = stream
-            })
-            peer.on("close",function(){
-                console.log("connection closed")
-            })
-            peer.on("end",function(){
-                console.log("connection ended")
-            })    
-        })
 
         socket.emit("viewer-join","")
         socket.on("viewer-accepted",function({socketId}){
@@ -313,29 +285,9 @@ function LiveStream(){
         })
     },[])
 
-    let leaveCallHandler = function(e){
-        e.preventDefault()
-        connectionRef.current.destroy()        
-    }
-
-    let liveStreamHandler = function(e){
-        window.navigator.mediaDevices.getUserMedia({video: true,audio:false}).then(function(stream){
-            //videoRef.current.srcObject = stream 
-            //setCurrentStream(stream)
-            // the test of the treaty
-            currentStreamRef.current = stream
-            // testing to see if setting the stream to this works amd using the ref works perfectly fine,lets see what's wrong.
-            videoRef.current.srcObject = currentStreamRef.current
-        }).catch(function(err){
-            console.log("some error occured during streaming")
-        })
-    }
-
     return (
         <div className="live-video">
             <div className="station-tag"><img id="live-logo" src={dalaFmRounded} alt=""/> <span>DALA FM</span></div>
-            <div className="live-tag"><button className="broadcast-button">share screen</button> </div>
-            <button className="hostName">Tom Okwiri</button>
             <video ref={videoRef} src="" className="actual-video" autoPlay={true}></video>
             <div className="bottom-slide-wrapper">
                 <div className="current-show-name">Mos Gi Tich</div>

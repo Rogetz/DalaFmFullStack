@@ -417,7 +417,7 @@ button.hostName{
     height: 3rem;
     object-fit: cover;
 }
-.station-tag{
+.presenter-station-tag{
     width: auto;
     height: 3rem;
     display: flex;
@@ -428,8 +428,9 @@ button.hostName{
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    z-index: 3;
+    z-index: 4;
 }
+
 .station-tag span{
     font-size: 1.5rem;
     color: blue;

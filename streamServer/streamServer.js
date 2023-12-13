@@ -51,7 +51,10 @@ socketServer.on("connection",function(socket){
         socketServer.to(to).emit("peer-call",{from,signal})
     })*/
 
-
+    // admin joining broadcast to all
+    socket.on("admin-join",function(){
+        socketServer.emit("admin-joined")
+    })
     /*new server data */
     socket.on("presenter-join",function(){
         // broadcast to all channels, notice that only the admin will be able to interpret this.

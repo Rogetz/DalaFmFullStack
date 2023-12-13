@@ -64,11 +64,12 @@ button.hostName{
     width: 100%;
     height: 1rem;
 }
-.live-video{
-    width: 35rem;
+.admin-live-video{
+    width: 40rem;
     height: 35rem;
     display: flex;
     flex-shrink: 0;
+    flex-grow: 0;
     position: relative;
     box-sizing: border-box;
 }
@@ -80,7 +81,7 @@ button.hostName{
 }
 
 @media screen and (max-width: 591px) {
-    div.live-video{
+    div.admin-live-video{
         width: 22rem;
         height: 22rem;
     }
@@ -107,9 +108,9 @@ button.hostName{
     font-size: 1.5rem;
     color: blue;
 }
-.live-tag{
+.admin-live-video .live-tag{
     position: absolute;
-    top: 0.2rem;
+    top: 0rem;
     left: 1rem;
     color: red;
     font-size: 1.3rem;
