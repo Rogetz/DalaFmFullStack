@@ -38,6 +38,7 @@ export function PresenterHome(){
 function LivePresenter(){
     const videoRef = useRef()
     const currentStreamRef = useRef()
+    const connectionRef = useRef()
 
     useEffect(function(){
         window.navigator.mediaDevices.getUserMedia({video: true,audio:false}).then(function(stream){
@@ -49,6 +50,7 @@ function LivePresenter(){
             videoRef.current.srcObject = currentStreamRef.current
         }).catch(function(err){
             console.log("some error occured during streaming")
+            console.log(err)
         })  
         const socket = io("ws://localhost:4037")
         // immediately announce presenter-join, share its Id to the admin that is present
@@ -100,6 +102,7 @@ function LivePresenter(){
             videoRef.current.srcObject = currentStreamRef.current
         }).catch(function(err){
             console.log("some error occured during streaming")
+            console.log(err)
         })
         const socket = io("ws://localhost:4037")
         // immediately announce presenter-join, share its Id to the admin that is present
@@ -113,6 +116,7 @@ function LivePresenter(){
             //and it must come with the particular socketId to send the request.
             const peer = new Peer({initiator: true,trickle:true,stream:currentStreamRef.current})
             let currentPeerToCall = socketId
+            connectionRef.current = peer
         
             peer.on("signal",function(signal){
                 socket.emit("peer-call",{to:currentPeerToCall,signal:signal})
@@ -141,7 +145,7 @@ function LivePresenter(){
             <div className="presenter-station-tag"><img id="live-logo" src={dalaFmRounded} alt=""/> <span>DALA FM</span></div>
             <div className="live-tag" onClick={liveStreamHandler}><button className="broadcast-button">share screen</button> </div>
             <button className="hostName">Tom Okwiri</button>
-            <video ref={videoRef} src="" className="actual-video" autoPlay={true}></video>
+            <video ref={videoRef} className="actual-video" autoPlay={true}></video>
             <div className="bottom-slide-wrapper">
                 <div className="current-show-name">Mos Gi Tich</div>
                 <marquee className="sliding-highlights" behavior="scroll" loop="infinite" direction="right" hspace="10%">Kenya National swimming team competing for the world cup finally.Reportedly ther have been 20 mend found dancing in the rain. New stock market statistics to watch. Harrambee stars the nwe world cup qualifiers.</marquee>
