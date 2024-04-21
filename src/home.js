@@ -287,8 +287,11 @@ function LiveStream(){
 
     return (
         <div className="live-video">
-            <div className="station-tag"><img id="live-logo" src={dalaFmRounded} alt=""/> <span>DALA FM</span></div>
-            <video ref={videoRef} src="" className="actual-video" autoPlay={true}></video>
+            <div className="live-station-tag"><img id="live-logo" src={dalaFmRounded} alt=""/> <span>DALA FM</span></div>
+            {/*
+            <video ref={videoRef} src="" className="actual-video" autoPlay={true}></video>            
+            */}
+            <img className="actual-video" src={musicStudio}/>
             <div className="bottom-slide-wrapper">
                 <div className="current-show-name">Mos Gi Tich</div>
                 <marquee className="sliding-highlights" behavior="scroll" loop="infinite" direction="right" hspace="10%">Kenya National swimming team competing for the world cup finally.Reportedly ther have been 20 mend found dancing in the rain. New stock market statistics to watch. Harrambee stars the nwe world cup qualifiers.</marquee>

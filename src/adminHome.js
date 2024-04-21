@@ -10,17 +10,39 @@ import presenter2 from "./presenter-2.PNG"
 import {io} from "socket.io-client"
 import Peer from "simple-peer"
 
-
+// this method of useReducer failed since I needed access to the ref which an outside function that useReducer demands could not directly access it.
+let liveReducer = function liveReducer(state,action){
+    if(action.type == "state-change"){
+        console.log("state-change dispatch received")
+        let newArray = liveComponentsRef.current.map(function(stream,index){
+            return <ViewComponent key={(Math.random(10000))} data={{stream:stream}}/>
+        })        
+        return newArray
+    }
+}
+let initialState = null
 
 export function AdminHome(){
     const [LiveComponents,setLiveComponents] = useState()
     // for storing the streams received.
     const liveComponentsRef = useRef([])
+    const [liveComponentState,setLiveComponentState] = useState(0)
     const currentViewerStream = useRef()
+    const [viewComponents,setViewComponents] = useState()
     //
-    const [viewComponents,dispatch] = useReducer(liveReducer,LiveComponents)
+    //const [viewComponents,dispatch] = useReducer(liveReducer,initialState)
 
-    //use a reducer to trigger the render of the viewComponents from the liveComponentsRef
+    //use effect for the viewComponents
+    useEffect(function(){
+        if(liveComponentsRef.current.length > 0){
+            console.log("liveComponentsRef change detected.")
+            console.log(`live component state is: ${liveComponentState}`)
+            let newArray = liveComponentsRef.current.map(function(stream,index){
+                return <ViewComponent key={(Math.random(10000))} data={{stream:stream}}/>
+            })        
+            setViewComponents(newArray)     
+        }
+    },[liveComponentState])
     useEffect(function(){ 
         const socket1 = io("ws://localhost:4037")
         socket1.emit("admin-join","")
@@ -29,7 +51,7 @@ export function AdminHome(){
             // make the live components an array snd add an item to it.
 
             // this will be set each time to enable dispatches and change in  the liveStreamRef
-            setLiveComponents(<LiveComponent key={(Math.random(10000))} data={{socketId:socketId,currentViewerStream:currentViewerStream,liveComponentsRef:liveComponentsRef,dispatch:dispatch}}/>)
+            setLiveComponents(<LiveComponent key={(Math.random(10000))} data={{socketId:socketId,currentViewerStream:currentViewerStream,liveComponentsRef:liveComponentsRef,setLiveComponentState:setLiveComponentState,liveComponentState:liveComponentState}}/>)
 
             /*if(LiveComponents == undefined || LiveComponents == null){
                 console.log("the liveComponents is null here.")
@@ -47,14 +69,6 @@ export function AdminHome(){
         })
         
     },[])
-    let liveReducer = function(state,action){
-        if(action.type == "state-change"){
-            let newArray =liveComponentsRef.current.map(function(stream,index){
-                return <ViewComponent key={(Math.random(10000))} data={{stream:stream}}/>
-            })        
-            return newArray
-        }
-    }
     return (
         <>
             <div className="main-div">
@@ -70,12 +84,11 @@ export function AdminHome(){
 // I want to see if the useRef can work perfectly with componnts.
 function LiveComponent(props){
     const socketId = props.data.socketId
-    const dispatch = props.data.dispatch
+    const setLiveComponentState = props.data.setLiveComponentState
+    const liveComponentState = props.data.liveComponentState
     const currentViewerStream = props.data.currentViewerStream
     const liveComponentsRef = props.data.liveComponentsRef
     const liveStreamReceivedRef = useRef()
-    const [liveStreamReceived,setLiveStreamReceived] = useState() 
-    const videoRef = useRef()
     useEffect(function(){
         const socket = io("ws://localhost:4037")
         let callingPeerId = null
@@ -95,11 +108,17 @@ function LiveComponent(props){
             liveStreamReceivedRef.current = stream
             // add it to the collection of streams in the main component.
             liveComponentsRef.current.push(stream)
+            // trying to use a function inside it
+            //let newerState = liveComponentState + 1
+            // trying to use a random number here.
+            let random1 = Math.random(1000)
+            let random2 = Math.random(1000)
+            let random3 = Math.random(1000)
+            let finalV = random1 * random2 / random3
+            setLiveComponentState(finalV)
             //create a videoRef for saving the stream into the video element
             // videoRefs will be an array. so you'll be pointing to them via their indexes.
-            videoRef.current.srcObject = stream
             // dispatch so that it can updat the liveComponentsRef
-            dispatch("state-change")
         })
         peer.on("connect",function(){
             console.log("connection to presenter established")
@@ -143,14 +162,15 @@ function LiveComponent(props){
 
     let broadcastHandler = function() {
         // sets the current liveStream that should be sent to the viewer
-        currentViewerStream.current = liveStreamReceived
+        currentViewerStream.current = liveStreamReceivedRef.current
     }
 }
 
 function ViewComponent(props){
+    const stream = props.data.stream
     const videoRef = useRef()
     useEffect(function(){
-        videoRef.current.srcObject = props.data.stream    
+        videoRef.current.srcObject = stream   
     },[])
     return (
         <div className="admin-live-video">

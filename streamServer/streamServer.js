@@ -53,10 +53,12 @@ socketServer.on("connection",function(socket){
 
     // admin joining broadcast to all
     socket.on("admin-join",function(){
+        console.log("admin received")
         socketServer.emit("admin-joined")
     })
     /*new server data */
     socket.on("presenter-join",function(){
+        console.log("presenter received")
         // broadcast to all channels, notice that only the admin will be able to interpret this.
         socketServer.emit("presenter-joined",{socketId: socket.id})
     })
@@ -71,6 +73,7 @@ socketServer.on("connection",function(socket){
         socketServer.to(to).emit("answered-peer",{socketId:socket.id,signal:signal})
     })
     socket.on("viewer-join",function(){
+        console.log("viewer received")
         socketServer.emit("viewer-joined",{socketId:socket.id})
     })
     socket.on("viewer-accept",function({to}){

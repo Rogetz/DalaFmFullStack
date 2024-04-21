@@ -378,8 +378,8 @@ a{
     height: 3rem;
     object-fit: cover;
 }
-.station-tag{
-    width: auto;
+.live-station-tag{
+    width: 10rem;
     height: 3rem;
     display: flex;
     flex-direction: row;
@@ -389,11 +389,11 @@ a{
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    z-index: 3;
+    z-index: 100;
 }
-.station-tag span{
+.live-station-tag span{
     font-size: 1.5rem;
-    color: blue;
+    color: white;
 }
 .live-tag{
     position: absolute;

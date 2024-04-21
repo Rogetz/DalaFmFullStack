@@ -47,7 +47,7 @@ function LivePresenter(){
             // the test of the treaty
             currentStreamRef.current = stream
             // testing to see if setting the stream to this works amd using the ref works perfectly fine,lets see what's wrong.
-            videoRef.current.srcObject = currentStreamRef.current
+            videoRef.current.srcObject = stream
         }).catch(function(err){
             console.log("some error occured during streaming")
             console.log(err)
@@ -99,7 +99,7 @@ function LivePresenter(){
             // the test of the treaty
             currentStreamRef.current = stream
             // testing to see if setting the stream to this works amd using the ref works perfectly fine,lets see what's wrong.
-            videoRef.current.srcObject = currentStreamRef.current
+            videoRef.current.srcObject = stream
         }).catch(function(err){
             console.log("some error occured during streaming")
             console.log(err)
